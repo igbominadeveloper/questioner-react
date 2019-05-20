@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 
 import { signupUser } from '../../../store/modules/auth';
 
+import Navbar from '../../presentationals/Navbar/Navbar';
 export class Signup extends Component {
   render() {
-    return <p>Welcome to the sign up page</p>;
+    return (
+      <div className="container-fluid">
+        <Navbar />
+      </div>
+    );
   }
 }
 
