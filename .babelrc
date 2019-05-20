@@ -3,10 +3,15 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "targets": {
+          "browsers": ["last 2 chrome versions"]
+        }
       }
     ],
     "@babel/preset-react"
   ],
-  "plugins": ["react-hot-loader/babel"]
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-class-properties"
+  ]
 }

@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 
-/**
- * Class App
- * @description Application base component
- */
 export default class App extends Component {
-  /**
-   * @returns {Function} render()
-   */
   render() {
     return (
       <div>
