@@ -1,10 +1,21 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class Signup extends Component {
+import { signupUser } from '../../../store/modules/auth';
+
+export class Signup extends Component {
   render() {
     return <p>Welcome to the sign up page</p>;
   }
 }
 
-export default Signup;
+const mapStateToProps = state => ({
+  isloading: state.auth.isLoading,
+  errors: state.auth.errors,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(
+  mapStateToProps,
+  { signupUser },
+)(Signup);
