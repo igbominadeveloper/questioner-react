@@ -1,12 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Render renders without error 1`] = `
-<div>
-  <h1>
-     Hello, World! 
-  </h1>
-  <p>
-    We are here baby
-  </p>
-</div>
+<Switch>
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/signup"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/login"
+  />
+</Switch>
 `;
