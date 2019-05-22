@@ -7,7 +7,7 @@ exports[`Custom Search renders without errors 1`] = `
   >
     <div
       className="shadow"
-      data-test="reg-form"
+      data-test="login-form"
       id="registration-form"
     >
       <form
@@ -17,36 +17,8 @@ exports[`Custom Search renders without errors 1`] = `
         <p
           className="form-header"
         >
-          Welcome! Signup here
+          Welcome! Login here
         </p>
-        <div
-          className="form-group"
-        >
-          <input
-            className="form-control"
-            id="firstname"
-            name="firstname"
-            onChange={[Function]}
-            placeholder="Firstname"
-            required={true}
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          className="form-group"
-        >
-          <input
-            className="form-control"
-            id="lastname"
-            name="lastname"
-            onChange={[Function]}
-            placeholder="Lastname"
-            required={true}
-            type="text"
-            value=""
-          />
-        </div>
         <div
           className="form-group"
         >
@@ -78,24 +50,11 @@ exports[`Custom Search renders without errors 1`] = `
         <div
           className="form-group"
         >
-          <input
-            className="form-control"
-            id="passwordConfirmation"
-            name="passwordConfirmation"
-            onChange={[Function]}
-            placeholder="Confirm Password"
-            required={true}
-            type="password"
-            value=""
-          />
-        </div>
-        <div
-          className="form-group"
-        >
           <button
             className="form-control btn-primary shadow"
+            data-test="submit-button"
           >
-            Sign up
+            Log in
           </button>
         </div>
       </form>
@@ -103,13 +62,13 @@ exports[`Custom Search renders without errors 1`] = `
         className="form-footer"
       >
         <span>
-          Have an account? 
+          Don't have an account? 
         </span>
         <Link
           className="form-link text-primary"
-          to="/login"
+          to="/signup"
         >
-          Sign in
+          Sign up
         </Link>
       </p>
     </div>

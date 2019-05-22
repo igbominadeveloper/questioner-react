@@ -3,11 +3,18 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_INITIALIZED,
   SIGNUP_ERROR,
+  LOGIN_INITIALIZED,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
   signUpIntialize,
   signUpSuccess,
   signUpError,
+  loginInitialize,
+  loginSuccess,
+  loginError,
   authReducer,
   signupUser,
+  loginUser,
 } from './auth';
 import { setupStore } from '../../utils/testHelpers';
 
@@ -88,6 +95,75 @@ describe('SIGNUP ACTIONS', () => {
     });
   });
 });
+describe('LOGIN ACTIONS', () => {
+  const loginMockData = {
+    data: {
+      token: 'hjhjhhgd094707h',
+      user: {
+        firstname: 'Favour',
+        lastname: 'Afolayan',
+        username: 'favour',
+      },
+    },
+  };
+
+  beforeEach(() => {
+    store = setupStore(initialState);
+  });
+
+  it('should dispatch an action for login request', () => {
+    const action = {
+      type: LOGIN_INITIALIZED,
+    };
+    expect(loginInitialize()).toEqual(action);
+  });
+  it('should dispatch an action for sign up success', () => {
+    const payload = {};
+    const action = {
+      type: LOGIN_SUCCESS,
+      payload,
+    };
+    expect(loginSuccess(payload)).toEqual(action);
+  });
+  it('should dispatch an action for sign up error', () => {
+    const error = '';
+    const action = {
+      type: LOGIN_ERROR,
+      error,
+    };
+    expect(loginError(error)).toEqual(action);
+  });
+  it('should dispatch a successful login action', () => {
+    http.post = jest
+      .fn()
+      .mockReturnValue(Promise.resolve({ data: loginMockData }));
+    const expectedActions = [
+      {
+        type: 'LOGIN_INITIALIZED',
+      },
+      {
+        type: 'LOGIN_SUCCESS',
+        payload: loginMockData,
+      },
+    ];
+    return store.dispatch(loginUser()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('should dispatch a failed login action', () => {
+    http.post = jest
+      .fn()
+      .mockReturnValue(Promise.reject(new Error('something bad happened')));
+    const errorActions = [
+      { type: 'LOGIN_INITIALIZED' },
+      { type: 'LOGIN_ERROR' },
+    ];
+    store.dispatch(loginUser()).then(() => {
+      expect(store.getActions()).toEqual(errorActions);
+    });
+  });
+});
 
 describe('auth reducer test suite', () => {
   beforeEach(() => {
@@ -114,6 +190,26 @@ describe('auth reducer test suite', () => {
 
   it('should update store for signup failure', () => {
     const action = signUpError({ error: 'error occured' });
+    const state = authReducer(initialState, action);
+    expect(state.isLoading).toBe(false);
+    expect(state.errors).toEqual(action.error);
+  });
+
+  it('should update store for loginIntialize', () => {
+    const action = loginInitialize();
+    const state = authReducer(initialState, action);
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('should update store for login success', () => {
+    const action = loginSuccess();
+    const state = authReducer(initialState, action);
+    expect(state.isLoading).toBe(false);
+    expect(state.successResponse).toEqual(action.response);
+  });
+
+  it('should update store for login failure', () => {
+    const action = loginError({ error: 'error occured' });
     const state = authReducer(initialState, action);
     expect(state.isLoading).toBe(false);
     expect(state.errors).toEqual(action.error);

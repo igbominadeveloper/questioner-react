@@ -1,5 +1,3 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 
 import { signUpRequest, loginRequest } from '../../api/auth';
@@ -9,7 +7,7 @@ import { setToken } from '../../utils/helpers';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 export const SIGNUP_INITIALIZED = 'SIGNUP_INITIALIZED';
-export const LOGIN_INITIALIZED = 'LOGIN_REQUESTED';
+export const LOGIN_INITIALIZED = 'LOGIN_INITIALIZED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
@@ -60,13 +58,17 @@ export const loginError = error => {
   };
 };
 
-export const loginUser = userData => {
+export const loginUser = (userData, from) => {
   return async dispatch => {
     try {
       dispatch(loginInitialize());
       const { data } = await loginRequest(userData);
       setToken(data.data.token);
-      swal(`Hi ${data.data.user.firstname}`, 'Welcome back', 'success');
+      swal(`Hi ${data.data.user.firstname}`, 'Welcome back', 'success').then(
+        response => {
+          response === true ? location.replace(from.pathname) : '';
+        },
+      );
       dispatch(loginSuccess(data));
     } catch (error) {
       const { data } = error.response;
@@ -86,7 +88,9 @@ export const signupUser = (userData, from) => {
         `Hi ${data.data.user.firstname}`,
         'Welcome to Questioner',
         'success',
-      );
+      ).then(response => {
+        response === true ? location.replace(from.pathname) : '';
+      });
       dispatch(signUpSuccess(data));
     } catch (error) {
       const { data } = error.response;
