@@ -1,3 +1,7 @@
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
+
 import { signUpRequest, loginRequest } from '../../api/auth';
 import { setToken } from '../../utils/helpers';
 
@@ -62,22 +66,31 @@ export const loginUser = userData => {
       dispatch(loginInitialize());
       const { data } = await loginRequest(userData);
       setToken(data.data.token);
+      swal(`Hi ${data.data.user.firstname}`, 'Welcome back', 'success');
       dispatch(loginSuccess(data));
     } catch (error) {
       const { data } = error.response;
+      swal('error', data.error, 'error');
       dispatch(loginError(data));
     }
   };
 };
 
-export const signupUser = userData => {
+export const signupUser = (userData, from) => {
   return async dispatch => {
     try {
       dispatch(signUpIntialize());
       const { data } = await signUpRequest(userData);
+      setToken(data.data.token);
+      swal(
+        `Hi ${data.data.user.firstname}`,
+        'Welcome to Questioner',
+        'success',
+      );
       dispatch(signUpSuccess(data));
     } catch (error) {
       const { data } = error.response;
+      swal('error', data.error, 'error');
       dispatch(signUpError(data));
     }
   };
@@ -96,6 +109,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         successResponse: action.payload,
         isLoading: false,
+        isAuthenticated: true,
         errors: [],
       };
 
@@ -103,6 +117,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isAuthenticated: false,
         errors: action.error,
       };
 
@@ -117,6 +132,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         successResponse: action.payload,
         isLoading: false,
+        isAuthenticated: true,
         errors: [],
       };
 
@@ -124,6 +140,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isAuthenticated: false,
         errors: action.error,
       };
 

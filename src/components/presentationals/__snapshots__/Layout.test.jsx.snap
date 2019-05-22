@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom Search renders without errors 1`] = `
+<Fragment>
+  <div
+    className="container-fluid"
+    data-test="container-fluid"
+  >
+    <Navbar
+      data-test="navbar"
+    />
+  </div>
+  <Footer />
+</Fragment>
+`;

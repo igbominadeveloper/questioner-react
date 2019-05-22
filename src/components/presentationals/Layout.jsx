@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import NavBar from './Navbar/Navbar';
+import Footer from './Footer/Footer';
 
 const Layout = ({ children }) => {
   return (
-    <div className="container-fluid">
-      <NavBar />
-      {children}
-    </div>
+    <Fragment>
+      <div className="container-fluid" data-test="container-fluid">
+        <NavBar data-test="navbar" />
+        {children}
+      </div>
+      <Footer />
+    </Fragment>
   );
 };
 

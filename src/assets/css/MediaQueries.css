@@ -6,20 +6,20 @@
 
 	.container-fluid {
 		width: 100%;
-	}
+  }
+
+  .container-fluid .nav-mobile-parent{
+    display: none;
+  }
 
 	#registration-form, #login-form {
 		width: 60%;
-	}
-	.nav-mobile-parent{
-		display: none;
 	}
 }
 
 @media only screen and (max-width: 1024px){
 	.container {
 		max-width: 100%;
-		zoom: 2;
 	}
 	.container-fluid {
 		max-width: 100%;
@@ -30,18 +30,14 @@
 	}
 	.sidebar-item {
 		margin: 20px auto;
-	}
-	.nav-mobile-parent {
-		display: none;
-	}
+  }
+
 	.meetup-stats {
 		margin: inherit;
 		height: inherit;
 		padding: 10px 4px;
 	}
-	.nav-mobile-parent{
-		display: none;
-	}
+
 
 	.list {
 		width: max-content;
@@ -50,7 +46,7 @@
 	.question-feed {
 		box-shadow: none;
 		background: none;
-		margin-top: 0px;
+		margin-top: 0;
 	}
 
 	.question-feed article {
@@ -82,15 +78,14 @@
 @media only screen and (max-width: 992px){
 	.container {
 		max-width: 100%;
-		margin: 0px !important;
-		zoom: 3;
+		margin: 0 !important;
 	}
 
 	.container-fluid {
 		max-width: 100%;
 	}
 
-	.sidebar,.navbar,.nav-mobile-parent {
+	.sidebar,.navbar {
 		display: none;
 	}
 
@@ -225,15 +220,16 @@
 		width: 100%;
 	}
 	.nav-mobile-parent {
-		display: flex;
+    display: flex;
+    padding: 14px 10px;
+    line-height: 31px;
 	}
 }
 
 @media only screen and (max-width: 600px){
 	.container {
 		max-width: 100%;
-		margin: 0px !important;
-		zoom: 3;
+		margin: 0 !important;
 	}
 
 	.container-fluid {

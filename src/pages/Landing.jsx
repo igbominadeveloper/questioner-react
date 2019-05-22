@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 //components
 import Layout from '../components/presentationals/Layout';
 
@@ -11,18 +11,20 @@ class HomePage extends Component {
     return (
       <Layout>
         <div>
-          <header className="banner mt-0" />
+          <header className="banner mt-0" data-test="header" />
           <div className="banner-text flex flex-column">
             <div className="view-more flex flex-column banner-buttons center mt-120">
-              <p className="text-heavy banner-title">Questioner</p>
+              <p className="text-heavy banner-title" data-test="banner-title">
+                Questioner
+              </p>
               <p className="banner-body">
                 Crowd-sourcing questions for meetups
               </p>
             </div>
             <div className="view-more flex flex-row banner-buttons center">
-              <a href="register.html">
+              <Link to="/register.html" data-test="signup">
                 <div className="btn-primary shadow">Sign up</div>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="view-more">
@@ -31,7 +33,7 @@ class HomePage extends Component {
         </div>
 
         <div className="meetup-wrapper">
-          <a href="meetup.html">
+          <Link to="/meetup.html">
             <div className="meetup shadow pb-2">
               <div className="meetup-image" id="laravel" />
               <p className="meetup-title">Laravel Nigeria Meetup</p>
@@ -44,9 +46,9 @@ class HomePage extends Component {
                 Zone Tech Park, Gbagada, Lagos
               </p>
             </div>
-          </a>
+          </Link>
 
-          <a href="meetup.html">
+          <Link to="/meetup.html">
             <div className="meetup shadow pb-2">
               <div className="meetup-image" id="forloop" />
               <p className="meetup-title">ForLoop Ilorin</p>
@@ -59,9 +61,9 @@ class HomePage extends Component {
                 Zone Tech Park, Gbagada, Lagos
               </p>
             </div>
-          </a>
+          </Link>
 
-          <a href="meetup.html">
+          <Link to="/meetup.html">
             <div className="meetup shadow pb-2">
               <div className="meetup-image" id="mocha" />
               <p className="meetup-title">Mocha Akure</p>
@@ -74,9 +76,9 @@ class HomePage extends Component {
                 Zone Tech Park, Gbagada, Lagos
               </p>
             </div>
-          </a>
+          </Link>
 
-          <a href="meetup.html">
+          <Link to="/meetup.html">
             <div className="meetup shadow pb-2">
               <div className="meetup-image" id="vue" />
               <p className="meetup-title">Vue JS Lagos Meetup</p>
@@ -89,9 +91,9 @@ class HomePage extends Component {
                 Zone Tech Park, Gbagada, Lagos
               </p>
             </div>
-          </a>
+          </Link>
 
-          <a href="meetup.html">
+          <Link to="/meetup.html">
             <div className="meetup shadow pb-2">
               <div className="meetup-image" id="laravel" />
               <p className="meetup-title">Laravel Nigeria Meetup</p>
@@ -104,9 +106,9 @@ class HomePage extends Component {
                 Zone Tech Park, Gbagada, Lagos
               </p>
             </div>
-          </a>
+          </Link>
 
-          <a href="meetup.html">
+          <Link to="/meetup.html">
             <div className="meetup shadow pb-2">
               <div className="meetup-image" id="mocha" />
               <p className="meetup-title">Mocha Akure</p>
@@ -119,8 +121,8 @@ class HomePage extends Component {
                 Zone Tech Park, Gbagada, Lagos
               </p>
             </div>
-          </a>
-          <a href="meetup.html">
+          </Link>
+          <Link to="/meetup.html">
             <div className="meetup shadow pb-2">
               <div className="meetup-image" id="vue" />
               <p className="meetup-title">Vue JS Lagos Meetup</p>
@@ -133,7 +135,7 @@ class HomePage extends Component {
                 Zone Tech Park, Gbagada, Lagos
               </p>
             </div>
-          </a>
+          </Link>
         </div>
         <div className="view-more" />
         <div className="how-to flex-column text-white">
@@ -172,62 +174,6 @@ class HomePage extends Component {
             <div className="btn-primary shadow">Sign up</div>
           </div>
         </div>
-        <footer>
-          <div className="footer-content flex text-white flex-row">
-            <div className="logo">
-              <div className="footer-groups flex flex-column">
-                <div className="footer-group-title">Questioner Logo</div>
-              </div>
-            </div>
-            <div className="flex flex-row space-between links">
-              <div className="footer-groups flex flex-column">
-                <div className="footer-group-title">Questioner</div>
-                <a href="#">
-                  <p>About us</p>
-                </a>
-                <a href="#">
-                  <p>How it works</p>
-                </a>
-                <a href="#">
-                  <p>Contact us</p>
-                </a>
-              </div>
-              <div className="footer-groups flex flex-column">
-                <div className="footer-group-title">Account</div>
-                <a href="register.html">
-                  <p>Sign up</p>
-                </a>
-                <a href="login.html">
-                  <p>Sign in</p>
-                </a>
-                <a href="password-reset.html">
-                  <p>Password reset</p>
-                </a>
-              </div>
-              <div className="footer-groups flex flex-column">
-                <div className="footer-group-title">Quick Links</div>
-                <a href="meetups.html">
-                  <p>All meetups</p>
-                </a>
-                <a href="#">
-                  <p>Upcoming</p>
-                </a>
-                <a href="#">
-                  <p>Latest</p>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="copyright bg-white p-10">
-            <p className="text-center">
-              Made with <i className="fa fa-heart text-danger" />
-              by &nbsp;
-              <a href="https://github.com/igbominadeveloper" className="github">
-                igbominadeveloper
-              </a>
-            </p>
-          </div>
-        </footer>
       </Layout>
     );
   }
