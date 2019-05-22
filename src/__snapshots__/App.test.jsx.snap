@@ -21,7 +21,15 @@ exports[`App Render renders without error 1`] = `
     path="/signup"
   />
   <Route
-    component={[Function]}
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(Login)",
+        "type": [Function],
+      }
+    }
     exact={true}
     path="/login"
   />

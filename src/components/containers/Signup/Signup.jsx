@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //modules
@@ -117,9 +118,9 @@ export class Signup extends Component {
             </form>
             <p className="form-footer">
               <span>Have an account? </span>
-              <a href="login.html" className="form-link text-primary">
+              <Link to="/login" className="form-link text-primary">
                 Sign in
-              </a>
+              </Link>
             </p>
           </div>
         </div>
