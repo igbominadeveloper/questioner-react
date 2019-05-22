@@ -65,7 +65,7 @@ export class Login extends Component {
                   className="form-control btn-primary shadow"
                   data-test="submit-button"
                 >
-                  Sign up
+                  Log in
                 </button>
               </div>
             </form>
