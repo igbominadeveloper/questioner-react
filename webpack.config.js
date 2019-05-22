@@ -15,10 +15,23 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: 'babel-loader',
+        exclude: [/node_modules/, /.test.(js|jsx)$/],
+        use: ['babel-loader'],
       },
       {
-        exclude: /node_modules/,
+        test: /\.(css|scss)$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jp(e*)g|svg|gif|ttf|woff|woff2|eot)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash]-[name].[ext]',
+            },
+          },
+        ],
       },
     ],
   },

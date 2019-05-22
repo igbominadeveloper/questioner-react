@@ -3,15 +3,7 @@
 exports[`App Render renders without error 1`] = `
 <Switch>
   <Route
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(Signup)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     exact={true}
     path="/"
   />

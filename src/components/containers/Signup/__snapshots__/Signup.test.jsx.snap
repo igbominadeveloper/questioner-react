@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom Search renders without errors 1`] = `
+<Layout>
+  <div
+    className="container"
+  >
+    <div
+      className="shadow"
+      data-test="reg-form"
+      id="registration-form"
+    >
+      <form
+        className="form"
+        onSubmit={[Function]}
+      >
+        <p
+          className="form-header"
+        >
+          Welcome! Signup here
+        </p>
+        <div
+          className="form-group"
+        >
+          <input
+            className="form-control"
+            id="firstname"
+            name="firstname"
+            onChange={[Function]}
+            placeholder="Firstname"
+            required={true}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <input
+            className="form-control"
+            id="lastname"
+            name="lastname"
+            onChange={[Function]}
+            placeholder="Lastname"
+            required={true}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <input
+            className="form-control"
+            id="email"
+            name="email"
+            onChange={[Function]}
+            placeholder="Email Address"
+            required={true}
+            type="email"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <input
+            className="form-control"
+            id="password"
+            name="password"
+            onChange={[Function]}
+            placeholder="Password"
+            required={true}
+            type="password"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <input
+            className="form-control"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            onChange={[Function]}
+            placeholder="Confirm Password"
+            required={true}
+            type="password"
+            value=""
+          />
+        </div>
+        <div
+          className="form-group"
+        >
+          <button
+            className="form-control btn-primary shadow"
+          >
+            Sign up
+          </button>
+        </div>
+      </form>
+      <p
+        className="form-footer"
+      >
+        <span>
+          Have an account? 
+        </span>
+        <a
+          className="form-link text-primary"
+          href="login.html"
+        >
+          Sign in
+        </a>
+      </p>
+    </div>
+  </div>
+</Layout>
+`;
