@@ -26,6 +26,42 @@ a {
 	color: black;
 }
 
+.loader-overlay {
+  position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,.4);
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.loader {
+    width: 478px;
+    opacity: 1;
+    pointer-events: none;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    position: static;
+    margin: 20px auto;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    z-index: 10001;
+    transition: opacity .2s,-webkit-transform .3s;
+    transition: transform .3s,opacity .2s;
+    transition: transform .3s,opacity .2s,-webkit-transform .3s;
+}
 /* a:hover{
 	font-weight: bold;
 } */
@@ -112,9 +148,14 @@ footer div.logo {
 
 /* Navbar */
 .nav-links {
-	width: 16rem;
-	margin: 2px 20px;
+	width: max-content;
+  margin: 2px 20px;
 }
+
+.nav-links:hover {
+  cursor: pointer;
+}
+
 .nav-links > ul{
 	display: flex;
   justify-content: space-between;

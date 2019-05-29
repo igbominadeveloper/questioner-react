@@ -2,7 +2,11 @@ import React from 'react';
 
 import Spinner from '../../../assets/images/loader.svg';
 const Loader = () => {
-  return <img src={Spinner} />;
+  return (
+    <div className="loader-overlay">
+      <img src={Spinner} className="loader" />
+    </div>
+  );
 };
 
 export default Loader;
