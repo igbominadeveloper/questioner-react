@@ -77,18 +77,15 @@ export const loginUser = (userData, from) => {
     try {
       dispatch(loginInitialize());
       const { data } = await loginRequest(userData);
-      console.log(data);
       setItem('token', data.data.token);
       setItem('user', JSON.stringify(data.data.user));
-      swal(`Hi ${data.data.user.firstname}`, 'Welcome back', 'success').then(
-        response => location.replace(from.pathname),
-      );
-      dispatch(loginSuccess(data.data));
+      swal(`Hi ${data.data.user.firstname}`, 'Welcome back', 'success')
+        .then(() => location.replace(from.pathname))
+        .then(() => dispatch(loginSuccess(data.data)));
     } catch (error) {
-      console.log(error);
-      // const { data } = error.response;
-      // swal('error', data.error, 'error');
-      // dispatch(loginError(data));
+      const { data } = error.response;
+      swal('error', data.error, 'error');
+      dispatch(loginError(data));
     }
   };
 };
@@ -116,27 +113,18 @@ export const signupUser = (userData, from) => {
   };
 };
 
-export const autoLogin = () => {
-  return async dispatch => {
-    try {
-      dispatch(loginInitialize());
-      const user = JSON.parse(getItem('user'));
-      const token = getItem('token');
-      dispatch(loginSuccess({ user, token }));
-    } catch (error) {
-      toast.error(error.message);
-      dispatch(loginError(error));
-    }
-  };
+export const autoLogin = dispatch => {
+  dispatch(loginInitialize());
+  const user = JSON.parse(getItem('user'));
+  const token = getItem('token');
+  dispatch(loginSuccess({ user, token }));
 };
 
-export const logout = () => {
-  return async dispatch => {
-    dispatch(logoutInitialize());
-    clearLocalStorage();
-    dispatch(logoutSuccess());
-    location.href = '/';
-  };
+export const logout = dispatch => {
+  dispatch(logoutInitialize());
+  clearLocalStorage();
+  dispatch(logoutSuccess());
+  location.href = '/';
 };
 
 export const authReducer = (state = initialState, action) => {

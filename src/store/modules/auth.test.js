@@ -147,7 +147,6 @@ describe('LOGIN ACTIONS', () => {
       },
     ];
     return store.dispatch(loginUser()).then(() => {
-      // console.log(store.getActions());
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -186,7 +185,6 @@ describe('auth reducer test suite', () => {
     const action = signUpSuccess();
     const state = authReducer(initialState, action);
     expect(state.isLoading).toBe(false);
-    console.log(action);
     expect(state.loggedInUser).toEqual(action.payload.user);
   });
 

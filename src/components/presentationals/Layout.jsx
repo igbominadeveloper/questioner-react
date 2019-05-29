@@ -16,18 +16,17 @@ export class Layout extends Component {
     const token = getItem('token');
     const user = getItem('user');
     if (token && user) {
-      // this.props.autoLogin();
+      this.props.signin();
     }
   }
 
   logOut = event => {
     event.preventDefault();
-    // this.props.logout();
+    this.props.signout();
   };
 
   render() {
     const { children, authUser } = this.props;
-    const Children = children;
     return (
       <div>
         <div className="container-fluid" data-test="container-fluid">
@@ -36,7 +35,7 @@ export class Layout extends Component {
             authenticatedUser={authUser}
             onClick={this.logOut}
           />
-          <div>{Children}</div>
+          <div>{children}</div>
         </div>
         <Footer />
       </div>
@@ -49,8 +48,12 @@ const mapStateToProps = state => ({
   authUser: state.auth.loggedInUser,
   isLoading: state.auth.isLoading,
 });
+const mapDispatchToProps = dispatch => ({
+  signin: () => dispatch(autoLogin),
+  signout: () => dispatch(logout),
+});
 
 export default connect(
   mapStateToProps,
-  { autoLogin, logout },
+  mapDispatchToProps,
 )(Layout);

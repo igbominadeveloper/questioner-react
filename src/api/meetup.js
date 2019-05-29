@@ -22,3 +22,7 @@ export const uploadImageToServer = async ({ image, tag }) => {
 export const getUpcomingMeetupsRequest = async () => {
   return await http.get('/meetups/upcoming');
 };
+
+export const getSingleMeetupRequest = async meetupId => {
+  return await http.get('/meetups/' + meetupId);
+};

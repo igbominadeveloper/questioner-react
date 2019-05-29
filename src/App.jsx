@@ -6,6 +6,7 @@ import Signup from './components/containers/Signup/Signup';
 import Login from './components/containers/Login/Login';
 import Homepage from './pages/Landing';
 import NewMeetup from './components/containers/NewMeetup/NewMeetup';
+import SingleMeetup from './pages/SingleMeetup/SingleMeetup';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
       <Route path="/organize" component={NewMeetup} />
+      <Route path="/meetup=:meetupId" component={SingleMeetup} />
     </Switch>
   );
 };

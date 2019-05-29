@@ -41,7 +41,22 @@ module.exports = {
       filename: './index.html',
     }),
   ],
+  plugins: [
+    // new Dotenv({
+    //   path: './.env.production',
+    //   safe: true,
+    //   systemvars: true,
+    //   silent: true,
+    //   defaults: true,
+    // }),
+    new HtmlWebPackPlugin({
+      template: './public/index.html',
+      inject: 'body',
+    }),
+  ],
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
 };

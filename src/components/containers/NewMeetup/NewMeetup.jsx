@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 
-import { Layout } from '../../presentationals/Layout';
+import Layout from '../../presentationals/Layout';
 import Loader from '../../presentationals/Loader/Loader';
 
 import { createNewMeetup } from '../../../store/modules/meetup';

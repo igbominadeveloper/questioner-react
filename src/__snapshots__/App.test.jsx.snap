@@ -3,7 +3,15 @@
 exports[`App Render renders without error 1`] = `
 <Switch>
   <Route
-    component={[Function]}
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(HomePage)",
+        "type": [Function],
+      }
+    }
     exact={true}
     path="/"
   />
@@ -42,6 +50,18 @@ exports[`App Render renders without error 1`] = `
       }
     }
     path="/organize"
+  />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(SingleMeetup)",
+        "type": [Function],
+      }
+    }
+    path="/meetup=:meetupId"
   />
 </Switch>
 `;
