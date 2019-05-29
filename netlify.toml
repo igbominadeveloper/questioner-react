@@ -1,0 +1,4 @@
+[build]
+base = "questioner-react/"
+publish = "questioner-react/dist/"
+command = "npm run build"
