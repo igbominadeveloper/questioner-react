@@ -148,7 +148,7 @@ footer div.logo {
 
 /* Navbar */
 .nav-links {
-	width: max-content;
+	width: 15rem;
   margin: 2px 20px;
 }
 
@@ -400,7 +400,7 @@ i{
 
 .view-more div{
 	padding: 16px;
-	width: 200px;
+	width: 10rem;
 	margin: 10px auto;
 }
 

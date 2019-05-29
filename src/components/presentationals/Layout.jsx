@@ -16,31 +16,30 @@ export class Layout extends Component {
     const token = getItem('token');
     const user = getItem('user');
     if (token && user) {
-      console.log(this.props);
       // this.props.autoLogin();
     }
   }
 
   logOut = event => {
     event.preventDefault();
-    console.log(this.props);
     // this.props.logout();
   };
 
   render() {
     const { children, authUser } = this.props;
+    const Children = children;
     return (
-      <Fragment>
+      <div>
         <div className="container-fluid" data-test="container-fluid">
           <NavBar
             data-test="navbar"
             authenticatedUser={authUser}
             onClick={this.logOut}
           />
-          {children}
+          <div>{Children}</div>
         </div>
         <Footer />
-      </Fragment>
+      </div>
     );
   }
 }

@@ -24,22 +24,22 @@ function Footer() {
           </div>
           <div className="footer-groups flex flex-column">
             <div className="footer-group-title">Account</div>
-            <Link to="/register.html">
+            <Link to="signup">
               <p>Sign up</p>
             </Link>
-            <Link to="/login.html">
+            <Link to="/login">
               <p>Sign in</p>
             </Link>
-            <Link to="/password-reset.html">
+            <Link to="/password-reset">
               <p>Password reset</p>
             </Link>
           </div>
           <div className="footer-groups flex flex-column">
             <div className="footer-group-title">Quick Links</div>
-            <Link to="/meetups.html">
+            <Link to="/meetups">
               <p>All meetups</p>
             </Link>
-            <Link to="/#">
+            <Link to="#">
               <p>Upcoming</p>
             </Link>
             <Link to="/#">

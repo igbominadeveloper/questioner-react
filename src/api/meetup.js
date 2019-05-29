@@ -18,3 +18,7 @@ export const uploadImageToServer = async ({ image, tag }) => {
     return uploadedImage.data.secure_url;
   }
 };
+
+export const getUpcomingMeetupsRequest = async () => {
+  return await http.get('/meetups/upcoming');
+};
