@@ -1,18 +1,56 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 
+//helpers
+import { getItem } from '../../utils/helpers';
+
+//modules
+import { autoLogin, logout } from '../../store/modules/auth';
+
+//components
 import NavBar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 
-const Layout = ({ children }) => {
-  return (
-    <Fragment>
-      <div className="container-fluid" data-test="container-fluid">
-        <NavBar data-test="navbar" />
-        {children}
-      </div>
-      <Footer />
-    </Fragment>
-  );
-};
+export class Layout extends Component {
+  componentDidMount() {
+    const token = getItem('token');
+    const user = getItem('user');
+    if (token && user) {
+      this.props.autoLogin(token, user);
+    }
+  }
 
-export default Layout;
+  logOut = event => {
+    event.preventDefault();
+    console.log(event);
+    this.props.logout();
+  };
+
+  render() {
+    const { children, authUser } = this.props;
+    return (
+      <Fragment>
+        <div className="container-fluid" data-test="container-fluid">
+          <NavBar
+            data-test="navbar"
+            authenticatedUser={authUser}
+            onClick={this.logOut}
+          />
+          {children}
+        </div>
+        <Footer />
+      </Fragment>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.token !== null,
+  authUser: state.auth.loggedInUser,
+  isLoading: state.auth.isLoading,
+});
+
+export default connect(
+  mapStateToProps,
+  { autoLogin, logout },
+)(Layout);

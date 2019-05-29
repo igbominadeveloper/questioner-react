@@ -22,14 +22,14 @@ let store;
 
 const initialState = {
   isLoading: false,
-  isAuthenticated: false,
   errors: [],
-  successResponse: [],
+  loggedInUser: null,
+  token: null,
 };
 describe('SIGNUP ACTIONS', () => {
   const signupMockData = {
     data: {
-      token: '',
+      token: 'kdkklkl--w09ioqn',
       user: {
         firstname: 'Favour',
         lastname: 'Afolayan',
@@ -117,7 +117,7 @@ describe('LOGIN ACTIONS', () => {
     };
     expect(loginInitialize()).toEqual(action);
   });
-  it('should dispatch an action for sign up success', () => {
+  it('should dispatch an action for login success', () => {
     const payload = {};
     const action = {
       type: LOGIN_SUCCESS,
@@ -147,6 +147,7 @@ describe('LOGIN ACTIONS', () => {
       },
     ];
     return store.dispatch(loginUser()).then(() => {
+      // console.log(store.getActions());
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -185,14 +186,8 @@ describe('auth reducer test suite', () => {
     const action = signUpSuccess();
     const state = authReducer(initialState, action);
     expect(state.isLoading).toBe(false);
-    expect(state.successResponse).toEqual(action.response);
-  });
-
-  it('should update store for signup failure', () => {
-    const action = signUpError({ error: 'error occured' });
-    const state = authReducer(initialState, action);
-    expect(state.isLoading).toBe(false);
-    expect(state.errors).toEqual(action.error);
+    console.log(action);
+    expect(state.loggedInUser).toEqual(action.payload.user);
   });
 
   it('should update store for loginIntialize', () => {
@@ -205,7 +200,7 @@ describe('auth reducer test suite', () => {
     const action = loginSuccess();
     const state = authReducer(initialState, action);
     expect(state.isLoading).toBe(false);
-    expect(state.successResponse).toEqual(action.response);
+    expect(state.loggedInUser).toEqual(action.response);
   });
 
   it('should update store for login failure', () => {

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Custom Search renders without errors 1`] = `
-<Layout>
+<ConnectFunction>
   <div>
     <header
       className="banner mt-0"
@@ -374,5 +374,5 @@ exports[`Custom Search renders without errors 1`] = `
       </div>
     </div>
   </div>
-</Layout>
+</ConnectFunction>
 `;
