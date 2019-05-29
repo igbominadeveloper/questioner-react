@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Custom Search renders without errors 1`] = `
-<Layout>
+<ConnectFunction>
   <div
     className="container"
   >
@@ -73,5 +73,5 @@ exports[`Custom Search renders without errors 1`] = `
       </p>
     </div>
   </div>
-</Layout>
+</ConnectFunction>
 `;

@@ -8,6 +8,7 @@ exports[`Custom Search renders without errors 1`] = `
   >
     <Navbar
       data-test="navbar"
+      onClick={[Function]}
     />
   </div>
   <Footer />

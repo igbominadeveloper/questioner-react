@@ -10,9 +10,13 @@ exports[`Custom Search renders without errors 1`] = `
     <div
       className="page-title"
     >
-      <h3>
-        Questioner
-      </h3>
+      <Link
+        to="/"
+      >
+        <h3>
+          Questioner
+        </h3>
+      </Link>
     </div>
     <div
       className="nav-links"

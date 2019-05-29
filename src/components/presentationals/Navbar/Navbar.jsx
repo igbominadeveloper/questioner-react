@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import '../../../assets/css/App.css';
 import '../../../assets/css/MediaQueries.css';
 import '../../../assets/css/Utility.css';
-const Navbar = () => {
+const Navbar = ({ authenticatedUser, onClick }) => {
   return (
     <Fragment>
       <nav className="navbar" id="navbar-desktop" data-test="navbar">
         <div className="page-title">
-          <h3>Questioner</h3>
+          <Link to="/">
+            <h3>Questioner</h3>
+          </Link>
         </div>
         <div className="nav-links" data-test="nav-links">
           <ul>
@@ -18,16 +20,42 @@ const Navbar = () => {
                 <span className="fa fa-meetup">Meetups</span>
               </Link>
             </li>
-            <li>
-              <Link to="/signup">
-                <span className="fa fa-user-plus">Sign up</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">
-                <span className="fa fa-user-plus">Sign in</span>
-              </Link>
-            </li>
+            {!authenticatedUser && (
+              <>
+                <li>
+                  <Link to="/signup">
+                    <span className="fa fa-user-plus">Sign up</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/login">
+                    <span className="fa fa-user-plus">Sign in</span>
+                  </Link>
+                </li>
+              </>
+            )}
+            {authenticatedUser && (
+              <>
+                {authenticatedUser.isadmin !== 1 ? (
+                  <li>
+                    <Link to="/profile">
+                      <span className="fa fa-user">My Profile</span>
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/admin-dashboard">
+                      <span className="fa fa-user">Dashboard</span>
+                    </Link>
+                  </li>
+                )}
+                <li>
+                  <Link to="#" onClick={onClick}>
+                    <span className="fa fa-sign-out">Logout</span>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
