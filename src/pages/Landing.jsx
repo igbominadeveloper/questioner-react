@@ -36,7 +36,7 @@ class HomePage extends Component {
               </p>
             </div>
             <div className="view-more flex flex-row banner-buttons center">
-              <Link to="signup" data-test="signup">
+              <Link to="/signup" data-test="signup">
                 <div className="btn-primary shadow">Sign up</div>
               </Link>
             </div>
@@ -50,7 +50,9 @@ class HomePage extends Component {
           {upcomingMeetups &&
             upcomingMeetups.length > 0 &&
             upcomingMeetups.map(meetup => (
-              <MeetupCard values={meetup} key={meetup.id} />
+              <Link to={`/meetup=${meetup.id}`} key={meetup.id}>
+                <MeetupCard values={meetup} key={meetup.id} />
+              </Link>
             ))}
         </div>
         <div className="view-more" />

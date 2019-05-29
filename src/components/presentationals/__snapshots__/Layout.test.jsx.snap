@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Custom Search renders without errors 1`] = `
-<Fragment>
+<div>
   <div
     className="container-fluid"
     data-test="container-fluid"
@@ -10,7 +10,8 @@ exports[`Custom Search renders without errors 1`] = `
       data-test="navbar"
       onClick={[Function]}
     />
+    <div />
   </div>
   <Footer />
-</Fragment>
+</div>
 `;

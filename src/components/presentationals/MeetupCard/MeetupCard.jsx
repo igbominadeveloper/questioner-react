@@ -2,11 +2,12 @@ import React from 'react';
 import moment from 'moment';
 
 import Image from '../Image/Image';
+import { DEFAULT_MEETUP_IMAGE } from '../../../config/config';
 const MeetupCard = ({ values }) => {
   return (
     <div className="meetup shadow pb-2">
       <div className="meetup-image">
-        <Image url={values.images[0]} />
+        <Image url={values.images[0] || DEFAULT_MEETUP_IMAGE} />
       </div>
       <p className="meetup-title">{values.topic}</p>
       <p className="meetup-date text-light">

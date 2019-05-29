@@ -3,6 +3,7 @@ import swal from 'sweetalert';
 import {
   createMeetupRequest,
   getUpcomingMeetupsRequest,
+  getSingleMeetupRequest,
 } from '../../api/meetup';
 
 //constants
@@ -13,13 +14,9 @@ export const GET_UPCOMING_MEETUPS_INITIALIZED =
   'GET_UPCOMING_MEETUPS_INITIALIZED';
 export const GET_UPCOMING_MEETUPS_SUCCESS = 'GET_UPCOMING_MEETUPS_SUCCESS';
 export const GET_UPCOMING_MEETUPS_ERROR = 'GET_UPCOMING_MEETUPS_ERROR';
-
-export const initialState = {
-  isLoading: false,
-  errors: [],
-  meetups: {},
-  upcomingMeetups: {},
-};
+export const GET_SINGLE_MEETUP_INITIALIZED = 'GET_SINGLE_MEETUP_INITIALIZED';
+export const GET_SINGLE_MEETUP_SUCCESS = 'GET_SINGLE_MEETUP_SUCCESS';
+export const GET_SINGLE_MEETUP_ERROR = 'GET_SINGLE_MEETUP_ERROR';
 
 export const createMeetupIntialize = () => {
   return {
@@ -61,22 +58,39 @@ export const getUpcomingMeetupsError = error => {
   };
 };
 
+export const getSingleMeetupIntialize = () => {
+  return {
+    type: GET_SINGLE_MEETUP_INITIALIZED,
+  };
+};
+
+export const getSingleMeetupSuccess = payload => {
+  return {
+    type: GET_SINGLE_MEETUP_SUCCESS,
+    payload,
+  };
+};
+
+export const getSingleMeetupError = error => {
+  return {
+    type: GET_SINGLE_MEETUP_ERROR,
+    error,
+  };
+};
+
 export const createNewMeetup = meetupPayload => {
   return async dispatch => {
     try {
-      console.log(meetupPayload);
       dispatch(createMeetupIntialize());
       const { data } = await createMeetupRequest(meetupPayload);
-      console.log(data);
-      swal('congratulations', 'Your meetup has been scheduled', 'success');
-
-      // .then(response => {
-      //   location.replace(from.pathname);
-      // });
+      swal('congratulations', 'Your meetup has been scheduled', 'success').then(
+        response => {
+          location.replace(from.pathname);
+        },
+      );
       dispatch(createMeetupSuccess(data.data));
     } catch (error) {
       const { data } = error.response;
-      console.log(error);
       swal('error', data.error, 'error');
       dispatch(createMeetupError(data));
     }
@@ -89,21 +103,39 @@ export const getUpcomingMeetups = () => {
       const { data } = await getUpcomingMeetupsRequest();
       dispatch(getUpcomingMeetupsSuccess(data.data));
     } catch (error) {
-      console.log(error);
       const { data } = error.response;
       dispatch(getUpcomingMeetupsError(data));
     }
   };
+};
+export const getSingleMeetup = meetupId => {
+  return async dispatch => {
+    try {
+      dispatch(getSingleMeetupIntialize());
+      const { data } = await getSingleMeetupRequest(meetupId);
+      dispatch(getSingleMeetupSuccess(data.data));
+    } catch (error) {
+      const { data } = error.response;
+      dispatch(getSingleMeetupError(data));
+    }
+  };
+};
+
+export const initialState = {
+  isLoading: false,
+  errors: [],
+  meetups: {},
+  upcomingMeetups: {},
 };
 
 export const meetupReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_MEETUP_INITIALIZED:
     case GET_UPCOMING_MEETUPS_INITIALIZED:
+    case GET_SINGLE_MEETUP_INITIALIZED:
       return {
         ...state,
         isLoading: true,
-        upcomingMeetups: [],
       };
 
     case CREATE_MEETUP_SUCCESS:
@@ -114,7 +146,6 @@ export const meetupReducer = (state = initialState, action) => {
           ...state.meetups,
           [action.payload.id]: action.payload,
         },
-        upcomingMeetups: [],
         errors: [],
       };
 
@@ -131,7 +162,6 @@ export const meetupReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         upcomingMeetups: action.payload,
-        ...state.meetups,
         errors: [],
       };
 
@@ -140,7 +170,24 @@ export const meetupReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         errors: action.error,
-        upcomingMeetups: {},
+      };
+
+    case GET_SINGLE_MEETUP_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        meetups: {
+          ...state.meetups,
+          [action.payload.id]: action.payload,
+        },
+        errors: [],
+      };
+
+    case GET_SINGLE_MEETUP_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        errors: action.error,
       };
 
     default:
