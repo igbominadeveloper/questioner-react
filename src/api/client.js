@@ -7,7 +7,6 @@ let baseURL;
 process.env.NODE_ENV === 'development'
   ? (baseURL = DEV_API_URL)
   : (baseURL = PROD_API_URL);
-console.log(getItem('token'));
 export const http = axios.create({
   baseURL,
   headers: {

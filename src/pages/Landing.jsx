@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 //components
 import Layout from '../components/presentationals/Layout';
+import MeetupCard from '../components/presentationals/MeetupCard/MeetupCard';
 
 //stylesheets
 import '../assets/css/LandingPage.css';
 
+//modules
+import { getUpcomingMeetups } from '../store/modules/meetup';
+
 class HomePage extends Component {
+  componentDidMount() {
+    const { upcomingMeetups } = this.props;
+    if (Object.keys(upcomingMeetups).length < 1) {
+      this.props.getUpcomingMeetups();
+    }
+  }
+
   render() {
+    const { upcomingMeetups } = this.props;
     return (
       <Layout>
         <div>
@@ -22,120 +36,22 @@ class HomePage extends Component {
               </p>
             </div>
             <div className="view-more flex flex-row banner-buttons center">
-              <Link to="/register.html" data-test="signup">
+              <Link to="signup" data-test="signup">
                 <div className="btn-primary shadow">Sign up</div>
               </Link>
             </div>
           </div>
           <div className="view-more">
-            <div className="meetups-heading">Latest Meetups</div>
+            <div className="meetups-heading">Upcoming Meetups</div>
           </div>
         </div>
 
         <div className="meetup-wrapper">
-          <Link to="/meetup.html">
-            <div className="meetup shadow pb-2">
-              <div className="meetup-image" id="laravel" />
-              <p className="meetup-title">Laravel Nigeria Meetup</p>
-              <p className="meetup-date text-light">
-                <i className="fa fa-calendar" />
-                Thursday, December 20, 9:00 AM
-              </p>
-              <p className="meetup-location text-light">
-                <i className="fa fa-map-marker" />
-                Zone Tech Park, Gbagada, Lagos
-              </p>
-            </div>
-          </Link>
-
-          <Link to="/meetup.html">
-            <div className="meetup shadow pb-2">
-              <div className="meetup-image" id="forloop" />
-              <p className="meetup-title">ForLoop Ilorin</p>
-              <p className="meetup-date text-light">
-                <i className="fa fa-calendar" />
-                Thursday, December 20, 9:00 AM
-              </p>
-              <p className="meetup-location text-light">
-                <i className="fa fa-map-marker" />
-                Zone Tech Park, Gbagada, Lagos
-              </p>
-            </div>
-          </Link>
-
-          <Link to="/meetup.html">
-            <div className="meetup shadow pb-2">
-              <div className="meetup-image" id="mocha" />
-              <p className="meetup-title">Mocha Akure</p>
-              <p className="meetup-date text-light">
-                <i className="fa fa-calendar" />
-                Thursday, December 20, 9:00 AM
-              </p>
-              <p className="meetup-location text-light">
-                <i className="fa fa-map-marker" />
-                Zone Tech Park, Gbagada, Lagos
-              </p>
-            </div>
-          </Link>
-
-          <Link to="/meetup.html">
-            <div className="meetup shadow pb-2">
-              <div className="meetup-image" id="vue" />
-              <p className="meetup-title">Vue JS Lagos Meetup</p>
-              <p className="meetup-date text-light">
-                <i className="fa fa-calendar" />
-                Thursday, December 20, 9:00 AM
-              </p>
-              <p className="meetup-location text-light">
-                <i className="fa fa-map-marker" />
-                Zone Tech Park, Gbagada, Lagos
-              </p>
-            </div>
-          </Link>
-
-          <Link to="/meetup.html">
-            <div className="meetup shadow pb-2">
-              <div className="meetup-image" id="laravel" />
-              <p className="meetup-title">Laravel Nigeria Meetup</p>
-              <p className="meetup-date text-light">
-                <i className="fa fa-calendar" />
-                Thursday, December 20, 9:00 AM
-              </p>
-              <p className="meetup-location text-light">
-                <i className="fa fa-map-marker" />
-                Zone Tech Park, Gbagada, Lagos
-              </p>
-            </div>
-          </Link>
-
-          <Link to="/meetup.html">
-            <div className="meetup shadow pb-2">
-              <div className="meetup-image" id="mocha" />
-              <p className="meetup-title">Mocha Akure</p>
-              <p className="meetup-date text-light">
-                <i className="fa fa-calendar" />
-                Thursday, December 20, 9:00 AM
-              </p>
-              <p className="meetup-location text-light">
-                <i className="fa fa-map-marker" />
-                Zone Tech Park, Gbagada, Lagos
-              </p>
-            </div>
-          </Link>
-          <Link to="/meetup.html">
-            <div className="meetup shadow pb-2">
-              <div className="meetup-image" id="vue" />
-              <p className="meetup-title">Vue JS Lagos Meetup</p>
-              <p className="meetup-date text-light">
-                <i className="fa fa-calendar" />
-                Thursday, December 20, 9:00 AM
-              </p>
-              <p className="meetup-location text-light">
-                <i className="fa fa-map-marker" />
-                Zone Tech Park, Gbagada, Lagos
-              </p>
-            </div>
-          </Link>
+          {upcomingMeetups &&
+            upcomingMeetups.length > 0 &&
+            upcomingMeetups.map(meetup => (
+              <MeetupCard values={meetup} key={meetup.id} />
+            ))}
         </div>
         <div className="view-more" />
         <div className="how-to flex-column text-white">
@@ -179,4 +95,11 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+const mapStateToProps = state => ({
+  upcomingMeetups: state.meetup.upcomingMeetups,
+});
+
+export default connect(
+  mapStateToProps,
+  { getUpcomingMeetups },
+)(HomePage);

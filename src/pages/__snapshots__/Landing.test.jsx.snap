@@ -30,7 +30,7 @@ exports[`Custom Search renders without errors 1`] = `
       >
         <Link
           data-test="signup"
-          to="/register.html"
+          to="signup.html"
         >
           <div
             className="btn-primary shadow"
