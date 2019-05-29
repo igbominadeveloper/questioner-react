@@ -16,14 +16,15 @@ export class Layout extends Component {
     const token = getItem('token');
     const user = getItem('user');
     if (token && user) {
-      this.props.autoLogin(token, user);
+      console.log(this.props);
+      // this.props.autoLogin();
     }
   }
 
   logOut = event => {
     event.preventDefault();
-    console.log(event);
-    this.props.logout();
+    console.log(this.props);
+    // this.props.logout();
   };
 
   render() {

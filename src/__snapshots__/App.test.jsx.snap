@@ -17,7 +17,6 @@ exports[`App Render renders without error 1`] = `
         "type": [Function],
       }
     }
-    exact={true}
     path="/signup"
   />
   <Route
@@ -30,8 +29,19 @@ exports[`App Render renders without error 1`] = `
         "type": [Function],
       }
     }
-    exact={true}
     path="/login"
+  />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(NewMeetup)",
+        "type": [Function],
+      }
+    }
+    path="/organize"
   />
 </Switch>
 `;

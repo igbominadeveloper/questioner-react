@@ -5,13 +5,15 @@ import { Route, Switch } from 'react-router-dom';
 import Signup from './components/containers/Signup/Signup';
 import Login from './components/containers/Login/Login';
 import Homepage from './pages/Landing';
+import NewMeetup from './components/containers/NewMeetup/NewMeetup';
 
 const App = () => {
   return (
     <Switch>
       <Route exact path="/" component={Homepage} />
-      <Route exact path="/signup" component={Signup} />
-      <Route exact path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
+      <Route path="/login" component={Login} />
+      <Route path="/organize" component={NewMeetup} />
     </Switch>
   );
 };
