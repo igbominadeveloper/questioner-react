@@ -25,7 +25,7 @@ exports[`Custom Search renders without errors 1`] = `
       <ul>
         <li>
           <Link
-            to="/meetups"
+            to="#"
           >
             <span
               className="fa fa-meetup"

@@ -1,41 +1,43 @@
 import React from 'react';
+import moment from 'moment';
 
-const Question = () => {
+const Question = ({ question }) => {
   return (
     <div className="question flex p-1 flex-column">
       <div className="question-body flex">
         <div className="avatar bg-black">
-          <p>ID</p>
+          <p>
+            {question.user.firstname.charAt(0).toUpperCase()}
+            {question.user.lastname.charAt(0).toUpperCase()}
+          </p>
         </div>
         <div className="question-details">
           <div className="question-content">
-            <div className="upper-details flex space-between">
+            <div className="upper-details flex space-between text-bold">
               <p className="question-user">
                 <a href="profile.html" className="text-black">
-                  Igbominadeveloper
+                  {question.user.firstname}&nbsp;
+                  {question.user.lastname}
                 </a>
               </p>
               <p className="text-light question-time">
-                <i className="fa fa-clock-o" />2 months ago
+                <i className="fa fa-clock-o" />
+                {moment(question.created_at).fromNow()}
               </p>
             </div>
-            <p className="text-light mt-1">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Assumenda laborum cumque praesentium impedit obcaecati est eaque
-              consectetur nisi tempore cupiditate?
-            </p>
+            <p className="text-light mt-1">{question.body}</p>
           </div>
           <div className="question-stats flex space-between mt-1">
             <p className="comment text-light">
-              <i className="fa fa-reply" />1
+              <i className="fa fa-reply" />0
             </p>
             <p className="like text-light upvote">
               <i className="fa fa-thumbs-o-up" />
-              <span>5</span>
+              <span>{question.upvotes}</span>
             </p>
             <p className="dislike text-light">
               <i className="fa fa-thumbs-o-down" />
-              <span>1</span>
+              <span>{question.downvotes}</span>
             </p>
           </div>
         </div>

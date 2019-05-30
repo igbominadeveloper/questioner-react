@@ -4,9 +4,9 @@ import moment from 'moment';
 
 //components
 import Layout from '../../components/presentationals/Layout';
-import Question from '../../components/presentationals/Question/Question';
 import { getSingleMeetup } from '../../store/modules/meetup';
 import { DEFAULT_MEETUP_IMAGE } from '../../config/config';
+import Questions from '../../components/containers/Questions/Questions';
 
 export class SingleMeetup extends Component {
   componentDidMount() {
@@ -14,6 +14,7 @@ export class SingleMeetup extends Component {
       this.props.getSingleMeetup(this.props.match.params.meetupId);
     }
   }
+
   render() {
     const { meetup } = this.props;
     return (
@@ -93,33 +94,15 @@ export class SingleMeetup extends Component {
                   <p className="text-light">{meetup.description}</p>
                 </article>
               )}
-              {meetup.questions && (
-                <article className="mt-5 meetup-questions m-20">
-                  <div className="question-title">
-                    <h3 className="text-heavy">Questions</h3>
-                  </div>
-                  <div className="questions-list">
-                    <Question />
-                    <div className="new-question">
-                      <form
-                        action=""
-                        id="question-form"
-                        className="flex flex-column"
-                      >
-                        <div className="form-group">
-                          <textarea
-                            className="form-control"
-                            name="question"
-                            id="question"
-                            placeholder="Your Question"
-                          />
-                        </div>
-                        <button className="btn-primary p-1 shadow">post</button>
-                      </form>
-                    </div>
-                  </div>
-                </article>
-              )}
+
+              <article className="mt-5 meetup-questions m-20">
+                <div className="question-title">
+                  <h3 className="text-heavy">Questions</h3>
+                </div>
+                <div className="questions-list">
+                  <Questions meetup={meetup.id} />
+                </div>
+              </article>
             </section>
           </div>
         )}
