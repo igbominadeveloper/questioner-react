@@ -16,7 +16,7 @@ const Navbar = ({ authenticatedUser, onClick }) => {
         <div className="nav-links" data-test="nav-links">
           <ul>
             <li>
-              <Link to="/meetups">
+              <Link to="#">
                 <span className="fa fa-meetup">Meetups</span>
               </Link>
             </li>
@@ -38,20 +38,20 @@ const Navbar = ({ authenticatedUser, onClick }) => {
               <>
                 {authenticatedUser.isadmin !== 1 ? (
                   <li>
-                    <Link to="/profile">
+                    <Link to="#">
                       <span className="fa fa-user">My Profile</span>
                     </Link>
                   </li>
                 ) : (
                   <li>
-                    <Link to="/admin-dashboard">
+                    <Link to="#">
                       <span className="fa fa-user">Dashboard</span>
                     </Link>
                   </li>
                 )}
                 <li>
                   <Link to="/organize">
-                    <span className="fa fa-add">Create Meetup</span>
+                    <span className="fa fa-edit">Create Meetup</span>
                   </Link>
                 </li>
                 <li>
