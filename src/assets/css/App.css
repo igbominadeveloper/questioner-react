@@ -260,12 +260,20 @@ nav h3, nav a, nav h2 {
 	margin: 5px;
 }
 
+.border {
+  border: 1px solid teal;
+}
+
 .meetup-date, .meetup-location {
 	margin: 5px;
 }
 
 .meetup-date p, .meetup-location p {
 	font-size: 20px;
+}
+
+.meetup-date .fa, .meetup-location .fa {
+  line-height: 24px;
 }
 
 

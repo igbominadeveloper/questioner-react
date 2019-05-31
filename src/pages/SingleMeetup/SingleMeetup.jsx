@@ -4,9 +4,12 @@ import moment from 'moment';
 
 //components
 import Layout from '../../components/presentationals/Layout';
-import { getSingleMeetup } from '../../store/modules/meetup';
-import { DEFAULT_MEETUP_IMAGE } from '../../config/config';
+import { getSingleMeetup, recordRsvp } from '../../store/modules/meetup';
 import Questions from '../../components/containers/Questions/Questions';
+import RsvpButton from '../../components/presentationals/RsvpButton/RsvpButton';
+
+//config
+import { DEFAULT_MEETUP_IMAGE } from '../../config/config';
 
 export class SingleMeetup extends Component {
   componentDidMount() {
@@ -14,6 +17,11 @@ export class SingleMeetup extends Component {
       this.props.getSingleMeetup(this.props.match.params.meetupId);
     }
   }
+
+  rsvpHandler = decision => {
+    debugger;
+    this.props.recordRsvp(this.props.meetup.id, decision);
+  };
 
   render() {
     const { meetup } = this.props;
@@ -47,22 +55,22 @@ export class SingleMeetup extends Component {
                     </p>
                   </div>
                 </div>
-                <div className="register flex">
-                  <p className="p-1">
-                    <a href="#" className="text-heavy p-10 br-20 text-primary">
-                      Register
-                    </a>
-                  </p>
-                  <p className="p-1">
-                    <a href="#" className="p-10 br-20 text-warning">
-                      Undecided
-                    </a>
-                  </p>
-                  <p className="p-1">
-                    <a href="#" className="p-10 br-20 text-danger">
-                      Not Interested
-                    </a>
-                  </p>
+                <div className="register flex align-items-end">
+                  <RsvpButton
+                    className="text-primary"
+                    text="Register"
+                    onClick={() => this.rsvpHandler('yes')}
+                  />
+                  <RsvpButton
+                    className="text-warning"
+                    text="Undecided"
+                    onClick={() => this.rsvpHandler('maybe')}
+                  />
+                  <RsvpButton
+                    className="text-danger"
+                    text="Not Interested"
+                    onClick={() => this.rsvpHandler('no')}
+                  />
                 </div>
               </div>
             </div>
@@ -119,5 +127,5 @@ const mapStateToProps = (state, props) => {
 };
 export default connect(
   mapStateToProps,
-  { getSingleMeetup },
+  { getSingleMeetup, recordRsvp },
 )(SingleMeetup);

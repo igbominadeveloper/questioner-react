@@ -26,6 +26,6 @@ describe('Custom Search', () => {
 
   it('renders the signup link on the banner', () => {
     const wrapper = findByTestAttribute(component, 'signup');
-    expect(wrapper.length).toBe(1);
+    expect(wrapper.length).toBe(2);
   });
 });

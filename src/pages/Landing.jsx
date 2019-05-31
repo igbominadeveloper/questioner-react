@@ -94,9 +94,19 @@ export class HomePage extends Component {
           </div>
         </div>
         <div className="above-footer flex">
-          <div className="view-more flex flex-row banner-buttons space-between">
-            <div className="btn-primary shadow">Sign up</div>
-          </div>
+          {isAuthenticated ? (
+            <Link to="/meetups" data-test="signup">
+              <div className="view-more flex flex-row banner-buttons space-between">
+                <div className="btn-primary shadow">Get Started</div>
+              </div>
+            </Link>
+          ) : (
+            <Link to="/meetups" data-test="signup">
+              <div className="view-more flex flex-row banner-buttons space-between">
+                <div className="btn-primary shadow">Sign up</div>
+              </div>
+            </Link>
+          )}
         </div>
       </Layout>
     );
