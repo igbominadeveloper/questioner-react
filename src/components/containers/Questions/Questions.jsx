@@ -5,6 +5,7 @@ import Question from '../../presentationals/Question/Question';
 import {
   getQuestions,
   createNewQuestion,
+  questionVote,
 } from '../../../store/modules/question';
 
 export class Questions extends Component {
@@ -31,18 +32,25 @@ export class Questions extends Component {
     this.setState({ question: '' });
   };
 
+  submitVote = (decision, questionId) => {
+    this.props.questionVote(decision, questionId);
+  };
+
   render() {
     const { questions } = this.props;
     return (
       <Fragment>
         {questions &&
           questions.length > 0 &&
-          questions.map((question, index) => (
-            <Question question={question} key={index} />
+          questions.map(question => (
+            <Question
+              question={question}
+              key={question.id}
+              submitVote={this.submitVote}
+            />
           ))}
         <div className="new-question">
           <form
-            action=""
             id="question-form"
             className="flex flex-column"
             onSubmit={this.questionSubmitHandler}
@@ -72,5 +80,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getQuestions, createNewQuestion },
+  { getQuestions, createNewQuestion, questionVote },
 )(Questions);
