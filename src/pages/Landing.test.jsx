@@ -1,11 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Landing from './Landing';
-
+import { HomePage } from './Landing';
 import { findByTestAttribute } from '../utils/testHelpers';
-
-const component = shallow(<Landing />);
+const props = {
+  upcomingMeetups: {},
+  getUpcomingMeetups: jest.fn(),
+};
+const component = shallow(<HomePage {...props} />);
 
 describe('Custom Search', () => {
   it('renders without errors', () => {

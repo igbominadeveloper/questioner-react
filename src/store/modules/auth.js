@@ -102,7 +102,7 @@ export const signupUser = (userData, from) => {
         'Welcome to Questioner',
         'success',
       ).then(response => {
-        location.replace(from.pathname);
+        // location.replace(from.pathname);
       });
       dispatch(signUpSuccess(data.data));
     } catch (error) {

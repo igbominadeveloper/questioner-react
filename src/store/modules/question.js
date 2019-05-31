@@ -101,7 +101,6 @@ export const questionVote = (decision, questionId) => async dispatch => {
     dispatch(questionVoteSuccess(data.data));
   } catch (error) {
     const { data } = error.response;
-    console.log(error);
     if (data.status !== 404) {
       swal('error', data.error, 'error');
     }
