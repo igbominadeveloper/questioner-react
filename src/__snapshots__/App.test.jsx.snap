@@ -15,7 +15,7 @@ exports[`App Render renders without error 1`] = `
     exact={true}
     path="/"
   />
-  <Route
+  <ConnectFunction
     component={
       Object {
         "$$typeof": Symbol(react.memo),
@@ -27,7 +27,7 @@ exports[`App Render renders without error 1`] = `
     }
     path="/signup"
   />
-  <Route
+  <ConnectFunction
     component={
       Object {
         "$$typeof": Symbol(react.memo),
@@ -39,7 +39,7 @@ exports[`App Render renders without error 1`] = `
     }
     path="/login"
   />
-  <Route
+  <withRouter(AdminWrapper)
     component={
       Object {
         "$$typeof": Symbol(react.memo),
