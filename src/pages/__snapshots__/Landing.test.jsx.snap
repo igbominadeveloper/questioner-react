@@ -132,15 +132,20 @@ exports[`Custom Search renders without errors 1`] = `
   <div
     className="above-footer flex"
   >
-    <div
-      className="view-more flex flex-row banner-buttons space-between"
+    <Link
+      data-test="signup"
+      to="/meetups"
     >
       <div
-        className="btn-primary shadow"
+        className="view-more flex flex-row banner-buttons space-between"
       >
-        Sign up
+        <div
+          className="btn-primary shadow"
+        >
+          Sign up
+        </div>
       </div>
-    </div>
+    </Link>
   </div>
 </ConnectFunction>
 `;
