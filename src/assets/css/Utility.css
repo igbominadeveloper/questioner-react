@@ -115,6 +115,9 @@
 .center {
 	justify-content: center;
 }
+.align-items-end{
+  align-items: flex-end;
+}
 
 .bg-black {
 	background: #4a4646;
