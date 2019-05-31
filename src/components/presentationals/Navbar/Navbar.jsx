@@ -43,17 +43,19 @@ const Navbar = ({ authenticatedUser, onClick }) => {
                     </Link>
                   </li>
                 ) : (
-                  <li>
-                    <Link to="#">
-                      <span className="fa fa-user">Dashboard</span>
-                    </Link>
-                  </li>
+                  <>
+                    <li>
+                      <Link to="#">
+                        <span className="fa fa-user">Dashboard</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/organize">
+                        <span className="fa fa-edit">Create Meetup</span>
+                      </Link>
+                    </li>
+                  </>
                 )}
-                <li>
-                  <Link to="/organize">
-                    <span className="fa fa-edit">Create Meetup</span>
-                  </Link>
-                </li>
                 <li>
                   <Link to="#" onClick={onClick}>
                     <span className="fa fa-sign-out">Logout</span>

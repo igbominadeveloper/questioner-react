@@ -21,7 +21,7 @@ export class HomePage extends Component {
   }
 
   render() {
-    const { upcomingMeetups } = this.props;
+    const { upcomingMeetups, isAuthenticated } = this.props;
     return (
       <Layout>
         <div>
@@ -36,9 +36,15 @@ export class HomePage extends Component {
               </p>
             </div>
             <div className="view-more flex flex-row banner-buttons center">
-              <Link to="/signup" data-test="signup">
-                <div className="btn-primary shadow">Sign up</div>
-              </Link>
+              {isAuthenticated ? (
+                <Link to="/meetups" data-test="signup">
+                  <div className="btn-primary shadow">Get Started</div>
+                </Link>
+              ) : (
+                <Link to="/signup" data-test="signup">
+                  <div className="btn-primary shadow">Sign up</div>
+                </Link>
+              )}
             </div>
           </div>
           <div className="view-more">
@@ -99,6 +105,7 @@ export class HomePage extends Component {
 
 const mapStateToProps = state => ({
   upcomingMeetups: state.meetup.upcomingMeetups,
+  isAuthenticated: state.auth.token !== null,
 });
 
 export default connect(
