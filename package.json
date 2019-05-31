@@ -7,11 +7,12 @@
   "author": "Favour Afolayan",
   "license": "ISC",
   "scripts": {
+    "start": "node server.js",
     "clean": "rm dist/bundle.js",
     "build": "webpack -p --mode production",
     "lint": "eslint src --fix",
     "prettier": "prettier --write '**/*.{js,jsx}'",
-    "start": "webpack-dev-server --hot --open",
+    "start:dev": "webpack-dev-server --hot --open",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "watch": "jest -u --watch"

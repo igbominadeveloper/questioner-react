@@ -12,7 +12,7 @@ import '../assets/css/LandingPage.css';
 //modules
 import { getUpcomingMeetups } from '../store/modules/meetup';
 
-class HomePage extends Component {
+export class HomePage extends Component {
   componentDidMount() {
     const { upcomingMeetups } = this.props;
     if (Object.keys(upcomingMeetups).length < 1) {
