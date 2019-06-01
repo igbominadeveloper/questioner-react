@@ -7,9 +7,20 @@ let baseURL;
 process.env.NODE_ENV === 'development'
   ? (baseURL = DEV_API_URL)
   : (baseURL = PROD_API_URL);
-export const http = axios.create({
+
+const http = axios.create({
   baseURL,
-  headers: {
-    'x-access-token': getItem('token'),
-  },
 });
+
+http.interceptors.request.use(
+  function(config) {
+    const token = getItem('token');
+    if (token) config.headers['x-access-token'] = token;
+    return config;
+  },
+  function(error) {
+    return Promise.reject(error);
+  },
+);
+
+export { http };

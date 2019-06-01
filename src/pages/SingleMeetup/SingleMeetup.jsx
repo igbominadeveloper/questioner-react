@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router';
 import moment from 'moment';
 
 //components
 import Layout from '../../components/presentationals/Layout';
-import { getSingleMeetup, recordRsvp } from '../../store/modules/meetup';
 import Questions from '../../components/containers/Questions/Questions';
 import RsvpButton from '../../components/presentationals/RsvpButton/RsvpButton';
+
+//modules
+import { getSingleMeetup, recordRsvp } from '../../store/modules/meetup';
+import { checkAndRedirect } from '../../store/modules/auth';
 
 //config
 import { DEFAULT_MEETUP_IMAGE } from '../../config/config';
@@ -19,7 +23,10 @@ export class SingleMeetup extends Component {
   }
 
   rsvpHandler = decision => {
-    debugger;
+    const { history, isAuthenticated, location } = this.props;
+    if (!isAuthenticated) {
+      return this.props.checkAndRedirect(location.pathname, history);
+    }
     this.props.recordRsvp(this.props.meetup.id, decision);
   };
 
@@ -121,11 +128,12 @@ export class SingleMeetup extends Component {
 const mapStateToProps = (state, props) => {
   const { meetupId } = props.match.params;
   return {
+    isAuthenticated: state.auth.token !== null,
     meetup: state.meetup.meetups[meetupId] || {},
     isLoading: state.meetup.isLoading,
   };
 };
 export default connect(
   mapStateToProps,
-  { getSingleMeetup, recordRsvp },
-)(SingleMeetup);
+  { getSingleMeetup, recordRsvp, checkAndRedirect },
+)(withRouter(SingleMeetup));
