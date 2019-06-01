@@ -76,13 +76,13 @@ export const rsvpMeetupError = error => ({
   error,
 });
 
-export const createNewMeetup = meetupPayload => async dispatch => {
+export const createNewMeetup = (meetupPayload, history) => async dispatch => {
   try {
     dispatch(createMeetupIntialize());
     const { data } = await createMeetupRequest(meetupPayload);
     swal('congratulations', 'Your meetup has been scheduled', 'success').then(
       response => {
-        location.replace(from.pathname);
+        history.push(`/meetup=${data.data.id}`);
       },
     );
     dispatch(createMeetupSuccess(data.data));

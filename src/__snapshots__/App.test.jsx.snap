@@ -61,6 +61,7 @@ exports[`App Render renders without error 1`] = `
         "type": [Function],
       }
     }
+    exact={true}
     path="/meetup=:meetupId"
   />
 </Switch>

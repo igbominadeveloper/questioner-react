@@ -17,7 +17,7 @@ const App = () => {
       <GuestWrapper path="/signup" component={Signup} />
       <GuestWrapper path="/login" component={Login} />
       <AdminWrapper path="/organize" component={NewMeetup} />
-      <Route path="/meetup=:meetupId" component={SingleMeetup} />
+      <Route exact path="/meetup=:meetupId" component={SingleMeetup} />
     </Switch>
   );
 };
