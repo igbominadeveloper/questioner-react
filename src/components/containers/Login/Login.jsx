@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 //modules
 import { loginUser } from '../../../store/modules/auth';
@@ -10,6 +11,7 @@ import Layout from '../../presentationals/Layout';
 
 //stylesheets
 import '../../../assets/css/Form.css';
+import { getItem } from '../../../utils/helpers';
 
 export class Login extends Component {
   state = {
@@ -26,8 +28,8 @@ export class Login extends Component {
   submitHandler = event => {
     event.preventDefault();
     const { password, email } = this.state;
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    this.props.loginUser({ email, password }, from);
+    const redirectUrl = getItem('redirectUrl') || '/';
+    this.props.loginUser({ email, password }, redirectUrl, this.props.history);
   };
   render() {
     return (
@@ -91,4 +93,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loginUser },
-)(Login);
+)(withRouter(Login));

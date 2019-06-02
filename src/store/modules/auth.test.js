@@ -15,6 +15,11 @@ import {
   authReducer,
   signupUser,
   loginUser,
+  logoutInitialize,
+  logoutSuccess,
+  autoLogin,
+  logout,
+  checkAndRedirect,
 } from './auth';
 import { setupStore } from '../../utils/testHelpers';
 
@@ -80,6 +85,9 @@ describe('SIGNUP ACTIONS', () => {
         data: signupMockData,
       }),
     );
+
+    const redirectUrl = '';
+    const history = { push: jest.fn() };
     const expectedActions = [
       {
         type: 'SIGNUP_INITIALIZED',
@@ -89,18 +97,28 @@ describe('SIGNUP ACTIONS', () => {
         payload: signupMockData.data,
       },
     ];
-    return store.dispatch(signupUser()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    return store
+      .dispatch(signupUser(signupMockData, redirectUrl, history))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
   });
 
   it('should dispatch a failed signup action', () => {
-    http.post = jest
-      .fn()
-      .mockReturnValue(Promise.reject(new Error('something bad happened')));
+    const error = {
+      response: {
+        data: {
+          error: 'something bad happened',
+        },
+      },
+    };
+    http.post = jest.fn().mockReturnValue(Promise.reject(error));
     const errorActions = [
       { type: 'SIGNUP_INITIALIZED' },
-      { type: 'SIGNUP_ERROR' },
+      {
+        type: 'SIGNUP_ERROR',
+        error: error.response.data,
+      },
     ];
     store.dispatch(signupUser()).then(() => {
       expect(store.getActions()).toEqual(errorActions);
@@ -119,6 +137,7 @@ describe('LOGIN ACTIONS', () => {
     };
     expect(loginInitialize()).toEqual(action);
   });
+
   it('should dispatch an action for login success', () => {
     const payload = {};
     const action = {
@@ -135,34 +154,82 @@ describe('LOGIN ACTIONS', () => {
     };
     expect(loginError(error)).toEqual(action);
   });
-  // it('should dispatch a successful login action', () => {
-  //   http.post = jest
-  //     .fn()
-  //     .mockReturnValue(Promise.resolve({ data: loginMockData }));
-  //   const expectedActions = [
-  //     {
-  //       type: 'LOGIN_INITIALIZED',
-  //     },
-  //     {
-  //       type: 'LOGIN_SUCCESS',
-  //       payload: loginMockData.data,
-  //     },
-  //   ];
-  //   return store.dispatch(loginUser()).then(() => {
-  //     expect(store.getActions()).toEqual(expectedActions);
-  //   });
-  // });
-
-  it('should dispatch a failed login action', () => {
+  it('should dispatch a successful login action', () => {
     http.post = jest
       .fn()
-      .mockReturnValue(Promise.reject(new Error('something bad happened')));
+      .mockReturnValue(Promise.resolve({ data: loginMockData }));
+
+    const redirectUrl = '';
+    const history = { push: jest.fn() };
+
+    const expectedActions = [
+      {
+        type: 'LOGIN_INITIALIZED',
+      },
+      {
+        type: 'LOGIN_SUCCESS',
+        payload: loginMockData.data,
+      },
+    ];
+
+    return store
+      .dispatch(loginUser(loginMockData, redirectUrl, history))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('should dispatch a failed login action', () => {
+    const error = {
+      response: {
+        data: {
+          error: 'something bad happened',
+        },
+      },
+    };
+    const data = (http.post = jest
+      .fn()
+      .mockReturnValue(Promise.reject({ ...error })));
     const errorActions = [
       { type: 'LOGIN_INITIALIZED' },
-      { type: 'LOGIN_ERROR' },
+      {
+        type: 'LOGIN_ERROR',
+        error: error.response.data,
+      },
     ];
     store.dispatch(loginUser()).then(() => {
       expect(store.getActions()).toEqual(errorActions);
+    });
+  });
+
+  it('should run without errors for autologin', () => {
+    const successActions = [
+      { type: 'LOGIN_INITIALIZED' },
+      {
+        type: 'LOGIN_SUCCESS',
+        payload: loginMockData.data,
+      },
+    ];
+    store.dispatch(autoLogin()).then(() => {
+      expect(store.getActions()).toEqual(successActions);
+    });
+  });
+
+  it('should run empty the store of authenticated data when the user logs out', () => {
+    const successActions = [
+      { type: 'LOGOUT_INITIALIZED' },
+      {
+        type: 'LOGOUT_SUCCESS',
+      },
+    ];
+    store.dispatch(logout()).then(() => {
+      expect(store.getActions()).toEqual(successActions);
+    });
+  });
+  it('should run redirect to login successfully', () => {
+    const history = { push: jest.fn() };
+    store.dispatch(checkAndRedirect('/', history)).then(() => {
+      expect(history.push).toHaveBeenCalled();
     });
   });
 });
@@ -208,5 +275,19 @@ describe('auth reducer test suite', () => {
     const state = authReducer(initialState, action);
     expect(state.isLoading).toBe(false);
     expect(state.errors).toEqual(action.error);
+  });
+
+  it('should update store for logout initialize', () => {
+    const action = logoutInitialize();
+    const state = authReducer(initialState, action);
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('should update store for logout success', () => {
+    const action = logoutSuccess();
+    const state = authReducer(initialState, action);
+    expect(state.isLoading).toBe(false);
+    expect(state.loggedInUser).toEqual(null);
+    expect(state.token).toEqual(null);
   });
 });

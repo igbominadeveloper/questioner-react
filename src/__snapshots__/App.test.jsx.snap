@@ -33,7 +33,7 @@ exports[`App Render renders without error 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(Login)",
+        "displayName": "Connect(withRouter(Login))",
         "type": [Function],
       }
     }
@@ -57,10 +57,11 @@ exports[`App Render renders without error 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(SingleMeetup)",
+        "displayName": "Connect(withRouter(SingleMeetup))",
         "type": [Function],
       }
     }
+    exact={true}
     path="/meetup=:meetupId"
   />
 </Switch>

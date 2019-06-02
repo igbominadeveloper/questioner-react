@@ -35,9 +35,9 @@ class NewMeetup extends Component {
     event.preventDefault();
     const file = document.querySelector("input[name='images']").files[0];
 
-    this.setState({
-      isLoading: true,
-    });
+    if (file.size === 0) {
+      return swal('image must be specified', 'error', 'error');
+    }
 
     if (file.size > 0) {
       const response = await uploadImageToServer({
@@ -52,12 +52,8 @@ class NewMeetup extends Component {
         },
       });
 
-      await this.props.createNewMeetup(this.state.meetup);
-      return this.setState({
-        isLoading: false,
-      });
+      this.props.createNewMeetup(this.state.meetup, this.props.history);
     }
-    return swal('image must be specified', 'error', 'error');
   };
   render() {
     return (

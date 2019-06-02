@@ -1,7 +1,12 @@
 import swal from 'sweetalert';
 
 import { signUpRequest, loginRequest } from '../../api/auth';
-import { setItem, getItem, clearLocalStorage } from '../../utils/helpers';
+import {
+  setItem,
+  getItem,
+  clearLocalStorage,
+  destroyItem,
+} from '../../utils/helpers';
 
 //constants
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
@@ -20,111 +25,97 @@ export const initialState = {
   loggedInUser: null,
 };
 
-export const signUpIntialize = () => {
-  return {
-    type: SIGNUP_INITIALIZED,
-  };
+export const signUpIntialize = () => ({
+  type: SIGNUP_INITIALIZED,
+});
+
+export const signUpSuccess = payload => ({
+  type: SIGNUP_SUCCESS,
+  payload,
+});
+
+export const signUpError = error => ({
+  type: SIGNUP_ERROR,
+  error,
+});
+
+export const loginInitialize = () => ({
+  type: LOGIN_INITIALIZED,
+});
+
+export const loginSuccess = payload => ({
+  type: LOGIN_SUCCESS,
+  payload,
+});
+
+export const loginError = error => ({
+  type: LOGIN_ERROR,
+  error,
+});
+
+export const logoutInitialize = () => ({
+  type: LOGOUT_INITIALIZED,
+});
+
+export const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
+});
+
+export const loginUser = (userData, redirectUrl, history) => async dispatch => {
+  try {
+    dispatch(loginInitialize());
+    const { data } = await loginRequest(userData);
+    setItem('token', data.data.token);
+    setItem('user', JSON.stringify(data.data.user));
+    history.push(redirectUrl);
+    swal(`Hi ${data.data.user.firstname}`, 'Welcome back', 'success');
+    dispatch(loginSuccess(data.data));
+    destroyItem('redirectUrl');
+  } catch (error) {
+    const { data } = error.response;
+    swal('error', data.error, 'error');
+    dispatch(loginError(data));
+  }
 };
 
-export const signUpSuccess = payload => {
-  return {
-    type: SIGNUP_SUCCESS,
-    payload,
-  };
+export const signupUser = (
+  userData,
+  redirectUrl,
+  history,
+) => async dispatch => {
+  try {
+    dispatch(signUpIntialize());
+    const { data } = await signUpRequest(userData);
+    setItem('token', data.data.token);
+    setItem('user', JSON.stringify(data.data.user));
+    swal(`Hi ${data.data.user.firstname}`, 'Welcome to Questioner', 'success');
+    dispatch(signUpSuccess(data.data));
+    history.push(redirectUrl);
+    destroyItem('redirectUrl');
+  } catch (error) {
+    const { data } = error.response;
+    swal('error', data.error, 'error');
+    dispatch(signUpError(data));
+  }
 };
 
-export const signUpError = error => {
-  return {
-    type: SIGNUP_ERROR,
-    error,
-  };
-};
-
-export const loginInitialize = () => {
-  return {
-    type: LOGIN_INITIALIZED,
-  };
-};
-
-export const loginSuccess = payload => {
-  return {
-    type: LOGIN_SUCCESS,
-    payload,
-  };
-};
-
-export const loginError = error => {
-  return {
-    type: LOGIN_ERROR,
-    error,
-  };
-};
-
-export const logoutInitialize = () => {
-  return {
-    type: LOGOUT_INITIALIZED,
-  };
-};
-
-export const logoutSuccess = () => {
-  return {
-    type: LOGOUT_SUCCESS,
-  };
-};
-
-export const loginUser = (userData, from) => {
-  return async dispatch => {
-    try {
-      dispatch(loginInitialize());
-      const { data } = await loginRequest(userData);
-      setItem('token', data.data.token);
-      setItem('user', JSON.stringify(data.data.user));
-      swal(`Hi ${data.data.user.firstname}`, 'Welcome back', 'success')
-        .then(() => location.replace(from.pathname))
-        .then(() => dispatch(loginSuccess(data.data)));
-    } catch (error) {
-      const { data } = error.response;
-      swal('error', data.error, 'error');
-      dispatch(loginError(data));
-    }
-  };
-};
-
-export const signupUser = (userData, from) => {
-  return async dispatch => {
-    try {
-      dispatch(signUpIntialize());
-      const { data } = await signUpRequest(userData);
-      setItem('token', data.data.token);
-      setItem('user', JSON.stringify(data.data.user));
-      swal(
-        `Hi ${data.data.user.firstname}`,
-        'Welcome to Questioner',
-        'success',
-      ).then(response => {
-        // location.replace(from.pathname);
-      });
-      dispatch(signUpSuccess(data.data));
-    } catch (error) {
-      const { data } = error.response;
-      swal('error', data.error, 'error');
-      dispatch(signUpError(data));
-    }
-  };
-};
-
-export const autoLogin = dispatch => {
+export const autoLogin = () => async dispatch => {
   dispatch(loginInitialize());
   const user = JSON.parse(getItem('user'));
   const token = getItem('token');
   dispatch(loginSuccess({ user, token }));
 };
 
-export const logout = dispatch => {
+export const logout = () => async dispatch => {
   dispatch(logoutInitialize());
   clearLocalStorage();
   dispatch(logoutSuccess());
   location.href = '/';
+};
+
+export const checkAndRedirect = (redirectUrl, history) => async dispatch => {
+  setItem('redirectUrl', redirectUrl);
+  history.push('/login');
 };
 
 export const authReducer = (state = initialState, action) => {

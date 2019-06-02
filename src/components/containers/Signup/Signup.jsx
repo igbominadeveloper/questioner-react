@@ -11,6 +11,7 @@ import Layout from '../../presentationals/Layout';
 //stylesheets
 import '../../../assets/css/Form.css';
 import swal from 'sweetalert';
+import { getItem } from '../../../utils/helpers';
 
 export class Signup extends Component {
   state = {
@@ -40,8 +41,12 @@ export class Signup extends Component {
       swal('passwords do not match', '', 'error');
       return;
     }
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    this.props.signupUser({ email, password, firstname, lastname }, from);
+    const redirectUrl = getItem('redirectUrl') || '/';
+    this.props.signupUser(
+      { email, password, firstname, lastname },
+      redirectUrl,
+      this.props.history,
+    );
   };
   render() {
     return (

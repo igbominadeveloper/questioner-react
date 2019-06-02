@@ -70,9 +70,8 @@ export const createNewQuestion = (
   try {
     dispatch(createQuestionIntialize());
     const { data } = await createQuestionRequest({ title, body, meetup_id });
-    swal('congratulations', 'Your question has been created', 'success').then(
-      () => dispatch(createQuestionSuccess(data.data)),
-    );
+    swal('Great!!!', 'Your question has been created', 'success');
+    dispatch(createQuestionSuccess(data.data));
   } catch (error) {
     const { data } = error.response;
     swal('error', data.error, 'error');
