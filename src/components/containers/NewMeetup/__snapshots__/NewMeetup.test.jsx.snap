@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Meetup renders without errors 1`] = `
+<ConnectFunction>
+  <div
+    className="meetup-form card mw-5 m-20 p-25"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <p
+        className="text-light form-header m-20"
+      >
+        Schedule a meetup
+      </p>
+      <div
+        className="form-group"
+      >
+        <input
+          className="form-control"
+          name="topic"
+          onChange={[Function]}
+          placeholder="Topic"
+          required={true}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <input
+          className="form-control"
+          name="images"
+          placeholder="Banner"
+          type="file"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <input
+          className="form-control"
+          name="organizerName"
+          onChange={[Function]}
+          placeholder="Organizer's Name"
+          required={true}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <input
+          className="form-control"
+          name="organizerPhone"
+          onChange={[Function]}
+          placeholder="Organizer's PhoneNumber"
+          required={true}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <input
+          className="form-control"
+          name="organizerEmail"
+          onChange={[Function]}
+          placeholder="Organizer's Email"
+          required={true}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <input
+          className="form-control"
+          name="date"
+          onChange={[Function]}
+          placeholder="date"
+          required={true}
+          type="date"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <input
+          className="form-control"
+          name="location"
+          onChange={[Function]}
+          placeholder="Location"
+          required={true}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <textarea
+          className="form-control"
+          cols="30"
+          name="description"
+          onChange={[Function]}
+          placeholder="The juicy highlights go here"
+          required={true}
+          rows="10"
+          value=""
+        />
+      </div>
+      <button
+        className="btn-primary container-fluid p-10"
+        disabled={false}
+      >
+        Schedule
+      </button>
+    </form>
+  </div>
+</ConnectFunction>
+`;

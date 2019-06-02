@@ -7,7 +7,7 @@ import { findByTestAttribute } from '../../../utils/testHelpers';
 
 const component = shallow(<Login />);
 
-describe('Custom Search', () => {
+describe('Login', () => {
   it('renders without errors', () => {
     expect(component).toMatchSnapshot();
   });

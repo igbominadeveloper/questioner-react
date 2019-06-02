@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Custom Search renders without errors 1`] = `
+exports[`Login renders without errors 1`] = `
 <ConnectFunction>
   <div
     className="container"
