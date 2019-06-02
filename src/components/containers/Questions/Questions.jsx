@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 import Question from '../../presentationals/Question/Question';
 import {
@@ -7,6 +8,7 @@ import {
   createNewQuestion,
   questionVote,
 } from '../../../store/modules/question';
+import { checkAndRedirect } from '../../../store/modules/auth';
 
 export class Questions extends Component {
   componentDidMount() {
@@ -23,7 +25,11 @@ export class Questions extends Component {
   };
 
   questionSubmitHandler = event => {
+    const { isAuthenticated, location, history } = this.props;
     event.preventDefault();
+    if (!isAuthenticated) {
+      return this.props.checkAndRedirect(location.pathname, history);
+    }
     this.props.createNewQuestion(
       'New Question',
       this.state.question,
@@ -33,6 +39,10 @@ export class Questions extends Component {
   };
 
   submitVote = (decision, questionId) => {
+    const { isAuthenticated, location, history } = this.props;
+    if (!isAuthenticated) {
+      return this.props.checkAndRedirect(location.pathname, history);
+    }
     this.props.questionVote(decision, questionId);
   };
 
@@ -76,9 +86,11 @@ export class Questions extends Component {
 
 const mapStateToProps = state => ({
   questions: state.question.questions,
+  isAuthenticated: state.auth.token !== null,
+  isLoading: state.meetup.isLoading,
 });
 
 export default connect(
   mapStateToProps,
-  { getQuestions, createNewQuestion, questionVote },
-)(Questions);
+  { getQuestions, createNewQuestion, questionVote, checkAndRedirect },
+)(withRouter(Questions));

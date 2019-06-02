@@ -37,7 +37,7 @@ export class HomePage extends Component {
             </div>
             <div className="view-more flex flex-row banner-buttons center">
               {isAuthenticated ? (
-                <Link to="/meetups" data-test="signup">
+                <Link to="#" data-test="getting-started">
                   <div className="btn-primary shadow">Get Started</div>
                 </Link>
               ) : (
@@ -93,15 +93,15 @@ export class HomePage extends Component {
             </article>
           </div>
         </div>
-        <div className="above-footer flex">
+        <div className="above-footer flex center">
           {isAuthenticated ? (
-            <Link to="/meetups" data-test="signup">
+            <Link to="#" data-test="getting-started">
               <div className="view-more flex flex-row banner-buttons space-between">
                 <div className="btn-primary shadow">Get Started</div>
               </div>
             </Link>
           ) : (
-            <Link to="/meetups" data-test="signup">
+            <Link to="/signup" data-test="signup">
               <div className="view-more flex flex-row banner-buttons space-between">
                 <div className="btn-primary shadow">Sign up</div>
               </div>

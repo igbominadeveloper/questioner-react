@@ -130,11 +130,11 @@ exports[`Custom Search renders without errors 1`] = `
     </div>
   </div>
   <div
-    className="above-footer flex"
+    className="above-footer flex center"
   >
     <Link
       data-test="signup"
-      to="/meetups"
+      to="/signup"
     >
       <div
         className="view-more flex flex-row banner-buttons space-between"
