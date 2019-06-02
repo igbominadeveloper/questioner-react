@@ -4,7 +4,11 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import { getItem } from '../../../../utils/helpers';
-const GuestWrapper = ({ component: Component, isAuthenticated, ...rest }) => {
+export const GuestWrapper = ({
+  component: Component,
+  isAuthenticated,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}

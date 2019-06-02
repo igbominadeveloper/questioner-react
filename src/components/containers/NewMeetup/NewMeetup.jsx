@@ -7,7 +7,7 @@ import Loader from '../../presentationals/Loader/Loader';
 
 import { createNewMeetup } from '../../../store/modules/meetup';
 import { uploadImageToServer } from '../../../api/meetup';
-class NewMeetup extends Component {
+export class NewMeetup extends Component {
   state = {
     meetup: {
       topic: '',
