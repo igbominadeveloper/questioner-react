@@ -1,5 +1,6 @@
 import swal from 'sweetalert';
 
+//api wrappers
 import {
   createQuestionRequest,
   getQuestionsRequest,
