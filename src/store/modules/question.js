@@ -180,7 +180,6 @@ export const questionReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         errors: action.error,
-        questions: [],
       };
 
     default:

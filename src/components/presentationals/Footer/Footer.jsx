@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-function Footer() {
+const Footer = () => {
   return (
     <footer data-test="footer">
       <div className="footer-content flex text-white flex-row">
@@ -24,19 +24,19 @@ function Footer() {
           </div>
           <div className="footer-groups flex flex-column">
             <div className="footer-group-title">Account</div>
-            <Link to="signup">
+            <Link to="/signup">
               <p>Sign up</p>
             </Link>
             <Link to="/login">
               <p>Sign in</p>
             </Link>
-            <Link to="/password-reset">
+            <Link to="#">
               <p>Password reset</p>
             </Link>
           </div>
           <div className="footer-groups flex flex-column">
             <div className="footer-group-title">Quick Links</div>
-            <Link to="/meetups">
+            <Link to="#">
               <p>All meetups</p>
             </Link>
             <Link to="#">
@@ -52,13 +52,17 @@ function Footer() {
         <p className="text-center">
           Made with <i className="fa fa-heart text-danger" />
           by &nbsp;
-          <Link to="/https://github.com/igbominadeveloper" className="github">
+          <a
+            href="https://github.com/igbominadeveloper"
+            target="_blank"
+            className="github"
+          >
             igbominadeveloper
-          </Link>
+          </a>
         </p>
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

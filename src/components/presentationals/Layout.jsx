@@ -16,13 +16,13 @@ export class Layout extends Component {
     const token = getItem('token');
     const user = getItem('user');
     if (token && user) {
-      this.props.signin();
+      this.props.autoLogin();
     }
   }
 
   logOut = event => {
     event.preventDefault();
-    this.props.signout();
+    this.props.logout();
   };
 
   render() {
@@ -48,12 +48,12 @@ const mapStateToProps = state => ({
   authUser: state.auth.loggedInUser,
   isLoading: state.auth.isLoading,
 });
-const mapDispatchToProps = dispatch => ({
-  signin: () => dispatch(autoLogin),
-  signout: () => dispatch(logout),
-});
+// const mapDispatchToProps = dispatch => ({
+//   signin: () => dispatch(autoLogin),
+//   signout: () => dispatch(logout),
+// });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { autoLogin, logout },
 )(Layout);
