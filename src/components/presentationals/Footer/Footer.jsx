@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer data-test="footer">
-      <div className="footer-content flex text-white flex-row">
+      {/* <div className="footer-content flex text-white flex-row">
         <div className="logo">
           <div className="footer-groups flex flex-column">
             <div className="footer-group-title">Questioner Logo</div>
@@ -47,7 +47,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="copyright bg-white p-10">
         <p className="text-center">
           Made with <i className="fa fa-heart text-danger" />
