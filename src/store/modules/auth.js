@@ -99,22 +99,21 @@ export const signupUser = (
   }
 };
 
-export const autoLogin = dispatch => {
+export const autoLogin = () => async dispatch => {
   dispatch(loginInitialize());
   const user = JSON.parse(getItem('user'));
   const token = getItem('token');
   dispatch(loginSuccess({ user, token }));
 };
 
-export const logout = dispatch => {
+export const logout = () => async dispatch => {
   dispatch(logoutInitialize());
   clearLocalStorage();
   dispatch(logoutSuccess());
   location.href = '/';
 };
 
-export const checkAndRedirect = (redirectUrl, history) => dispatch => {
-  dispatch(loginInitialize());
+export const checkAndRedirect = (redirectUrl, history) => async dispatch => {
   setItem('redirectUrl', redirectUrl);
   history.push('/login');
 };
