@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Comments from '../../containers/Comments/Comments';
 
 const Question = ({ question, submitVote }) => {
   return (
@@ -49,46 +50,7 @@ const Question = ({ question, submitVote }) => {
           </div>
         </div>
       </div>
-
-      <div className="question-comments">
-        <div className="single-comment flex p-1">
-          <div className="avatar bg-black">
-            <p>ID</p>
-          </div>
-          <div className="comment-details">
-            <div className="comment-content">
-              <div className="upper-details flex space-between">
-                <p className="comment-user">
-                  <a href="profile.html" className="text-black">
-                    Igbominadeveloper
-                  </a>
-                </p>
-                <p className="text-light comment-time">
-                  <i className="fa fa-clock-o" />2 months ago
-                </p>
-              </div>
-              <p className="text-light mt-1">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Assumenda laborum cumque praesentium impedit obcaecati est eaque
-                consectetur nisi tempore cupiditate?
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="new-comment">
-        <form action="" id="comment-form" className="flex flex-column">
-          <div className="form-group">
-            <textarea
-              className="form-control"
-              name="comment"
-              id="comment"
-              placeholder="Your comment"
-            />
-          </div>
-          <button className="btn-primary p-1 shadow">post</button>
-        </form>
-      </div>
+      <Comments comments={question.comments} question={question.id} />
     </div>
   );
 };

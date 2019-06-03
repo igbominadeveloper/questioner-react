@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comment renders without errors 1`] = `
+<div
+  className="single-comment flex p-1"
+>
+  <div
+    className="avatar bg-black"
+  >
+    <p />
+  </div>
+  <div
+    className="comment-details"
+  >
+    <div
+      className="comment-content"
+    >
+      <div
+        className="upper-details flex space-between"
+      >
+        <p
+          className="comment-user"
+        >
+          <a
+            className="text-black text-bold"
+            href="#"
+          >
+             
+          </a>
+        </p>
+        <p
+          className="text-light comment-time"
+        >
+          <i
+            className="fa fa-clock-o"
+          />
+          a few seconds ago
+        </p>
+      </div>
+      <p
+        className="text-light mt-1"
+      />
+    </div>
+  </div>
+</div>
+`;

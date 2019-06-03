@@ -320,7 +320,7 @@ form input[type="search"] {
 }
 
 .question-details {
-	width: 50%;
+	width: 100%;
 }
 
 .question-feed {
@@ -333,9 +333,12 @@ form input[type="search"] {
 }
 
 .question-comments {
-	display: none;
 	margin: 10px 0 10px 50px;
 	border-left: 1px solid teal;
+}
+
+.comment-details {
+  width: 100%;
 }
 
 .organizer {

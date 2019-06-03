@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comments renders without errors 1`] = `
+<div
+  className="question-comments"
+>
+  <div
+    className="new-comment"
+  >
+    <form
+      action=""
+      className="flex flex-column"
+      id="comment-form"
+    >
+      <div
+        className="form-group"
+      >
+        <textarea
+          className="form-control"
+          id="comment"
+          name="comment"
+          placeholder="Your comment"
+        />
+      </div>
+      <button
+        className="btn-primary p-1 shadow"
+      >
+        post
+      </button>
+    </form>
+  </div>
+</div>
+`;
