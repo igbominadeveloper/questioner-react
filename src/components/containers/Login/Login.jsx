@@ -12,6 +12,7 @@ import Layout from '../../presentationals/Layout';
 //stylesheets
 import '../../../assets/css/Form.css';
 import { getItem } from '../../../utils/helpers';
+import Loader from '../../presentationals/Loader/Loader';
 
 export class Login extends Component {
   state = {
@@ -34,6 +35,7 @@ export class Login extends Component {
   render() {
     return (
       <Layout>
+        {this.props.isLoading && <Loader />}
         <div className="container">
           <div id="registration-form" className="shadow" data-test="login-form">
             <form onSubmit={this.submitHandler} className="form">
@@ -85,7 +87,7 @@ export class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  isloading: state.auth.isLoading,
+  isLoading: state.auth.isLoading,
   errors: state.auth.errors,
   isAuthenticated: state.auth.isAuthenticated,
 });
