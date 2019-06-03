@@ -92,7 +92,6 @@ export const createNewMeetup = (meetupPayload, history) => async dispatch => {
     dispatch(createMeetupError(data));
   }
 };
-
 export const getUpcomingMeetups = () => async dispatch => {
   try {
     dispatch(getUpcomingMeetupsIntialize());
@@ -162,6 +161,9 @@ export const meetupReducer = (state = initialState, action) => {
       };
 
     case CREATE_MEETUP_ERROR:
+    case GET_UPCOMING_MEETUPS_ERROR:
+    case GET_SINGLE_MEETUP_ERROR:
+    case RSVP_MEETUP_ERROR:
       return {
         ...state,
         isLoading: false,
@@ -177,13 +179,6 @@ export const meetupReducer = (state = initialState, action) => {
         errors: [],
       };
 
-    case GET_UPCOMING_MEETUPS_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        errors: action.error,
-      };
-
     case GET_SINGLE_MEETUP_SUCCESS:
       return {
         ...state,
@@ -195,25 +190,11 @@ export const meetupReducer = (state = initialState, action) => {
         errors: [],
       };
 
-    case GET_SINGLE_MEETUP_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        errors: action.error,
-      };
-
     case RSVP_MEETUP_SUCCESS:
       return {
         ...state,
         isLoading: false,
         rsvp: action.payload,
-      };
-
-    case RSVP_MEETUP_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        errors: action.error,
       };
 
     default:

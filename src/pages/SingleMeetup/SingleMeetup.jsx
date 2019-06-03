@@ -14,6 +14,7 @@ import { checkAndRedirect } from '../../store/modules/auth';
 
 //config
 import { DEFAULT_MEETUP_IMAGE } from '../../config/config';
+import Loader from '../../components/presentationals/Loader/Loader';
 
 export class SingleMeetup extends Component {
   componentDidMount() {
@@ -31,9 +32,10 @@ export class SingleMeetup extends Component {
   };
 
   render() {
-    const { meetup } = this.props;
+    const { meetup, isLoading } = this.props;
     return (
       <Layout>
+        {isLoading && <Loader />}
         {meetup && meetup.id && (
           <div className="single-meetup">
             <div className="meetup-header">

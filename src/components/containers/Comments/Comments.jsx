@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 
 //components
 import Comment from '../../presentationals/Comment/Comment';
+import Loader from '../../presentationals/Loader/Loader';
 
 //modules
 import { checkAndRedirect } from '../../../store/modules/auth';
@@ -33,9 +34,10 @@ export class Comments extends Component {
   };
 
   render() {
-    const { comments } = this.props;
+    const { comments, isLoading } = this.props;
     return (
       <div className="question-comments">
+        {isLoading && <Loader />}
         {comments &&
           comments.length > 0 &&
           comments.map(comment => (

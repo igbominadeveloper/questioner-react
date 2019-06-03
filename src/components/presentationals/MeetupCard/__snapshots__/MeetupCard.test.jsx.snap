@@ -28,7 +28,7 @@ exports[`MeetupCard Render renders without error 1`] = `
     <i
       className="fa fa-clock-o"
     />
-    12:10 pm
+    06:42 pm
   </p>
   <p
     className="meetup-location text-light"
