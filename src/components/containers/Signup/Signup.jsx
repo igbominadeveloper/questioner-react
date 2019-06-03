@@ -51,6 +51,7 @@ export class Signup extends Component {
   render() {
     return (
       <Layout>
+        {this.props.isLoading && <Loader />}
         <div className="container">
           <div id="registration-form" className="shadow" data-test="reg-form">
             <form onSubmit={this.submitHandler} className="form">
