@@ -87,7 +87,7 @@ export class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  isloading: state.auth.isLoading,
+  isLoading: state.auth.isLoading,
   errors: state.auth.errors,
   isAuthenticated: state.auth.isAuthenticated,
 });
