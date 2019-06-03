@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RsvpButton Render renders without error 1`] = `
+<p
+  className="p-1 border br-20 mr-5"
+  onClick={[MockFunction]}
+>
+  <a
+    className="text-heavy p-10 br-20 "
+    href="#"
+  />
+</p>
+`;

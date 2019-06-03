@@ -23,6 +23,13 @@ import {
   createNewQuestion,
   questionVote,
   questionReducer,
+  CREATE_COMMENT_INITIALIZED,
+  createCommentIntialize,
+  CREATE_COMMENT_SUCCESS,
+  createCommentSuccess,
+  CREATE_COMMENT_ERROR,
+  createCommentError,
+  createNewComment,
 } from './question';
 
 let store;
@@ -156,6 +163,37 @@ describe('QUESTION VOTE ACTIONS', () => {
       error,
     };
     expect(questionVoteError(error)).toEqual(action);
+  });
+});
+
+describe('CREATE COMMENTS ACTIONS', () => {
+  beforeEach(() => {
+    store = setupStore(initialState);
+  });
+
+  it('should dispatch an action for comment request', () => {
+    const action = {
+      type: CREATE_COMMENT_INITIALIZED,
+    };
+    expect(createCommentIntialize()).toEqual(action);
+  });
+
+  it('should dispatch an action for create comment success', () => {
+    const payload = {};
+    const action = {
+      type: CREATE_COMMENT_SUCCESS,
+      payload,
+    };
+    expect(createCommentSuccess(payload)).toEqual(action);
+  });
+
+  it('should dispatch an action for create comment error', () => {
+    const error = '';
+    const action = {
+      type: CREATE_COMMENT_ERROR,
+      error,
+    };
+    expect(createCommentError(error)).toEqual(action);
   });
 });
 describe('GET QUESTIONS INTEGRATION TEST ', () => {
@@ -311,6 +349,75 @@ describe('QUESTION VOTE INTEGRATION TEST ', () => {
   });
 });
 
+describe('CREATE COMMENT INTEGRATION TEST ', () => {
+  beforeEach(() => {
+    store = setupStore(initialState);
+  });
+  const newComment = {
+    data: {
+      id: 46,
+      user_id: 1,
+      question_id: 1,
+      comment: 'my new comment is here',
+      created_at: '2019-06-03T10:54:08.917Z',
+      updated_at: '2019-06-03T10:54:08.917Z',
+      user: {
+        id: 1,
+        firstname: 'Common',
+        lastname: 'User',
+        othername: null,
+        username: null,
+        phonenumber: null,
+        email: 'user@questioner.com',
+      },
+    },
+  };
+
+  it('should create a comment successfully', () => {
+    http.post = jest.fn().mockReturnValue(
+      Promise.resolve({
+        data: newComment,
+      }),
+    );
+    const expectedActions = [
+      {
+        type: 'CREATE_COMMENT_INITIALIZED',
+      },
+      {
+        type: 'CREATE_COMMENT_SUCCESS',
+        payload: newComment.data,
+      },
+    ];
+    return store
+      .dispatch(createNewComment({ question_id: 1, comment: 'comment' }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('should fail to create a comment', () => {
+    const error = {
+      response: {
+        data: {
+          error: 'something bad happened',
+        },
+      },
+    };
+    http.post = jest.fn().mockReturnValue(Promise.reject(error));
+    const errorActions = [
+      { type: 'CREATE_COMMENT_INITIALIZED' },
+      {
+        type: 'CREATE_COMMENT_ERROR',
+        error: error.response.data,
+      },
+    ];
+
+    store
+      .dispatch(createNewComment())
+      .then(() => expect(store.getActions()).toEqual(errorActions));
+  });
+});
+
 describe('question reducer test suite', () => {
   beforeEach(() => {
     store = setupStore(initialState);
@@ -379,6 +486,27 @@ describe('question reducer test suite', () => {
   it('should update store for question vote failure', () => {
     const error = '';
     const action = questionVoteError(error);
+    const state = questionReducer(initialState, action);
+    expect(state.isLoading).toBe(false);
+    expect(state.errors).toBe(error);
+  });
+
+  it('should update store for commentCreateInitialize', () => {
+    const action = createCommentIntialize();
+    const state = questionReducer(initialState, action);
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('should update store for create comment success', () => {
+    const action = createCommentSuccess();
+    const state = questionReducer(initialState, action);
+    expect(state.isLoading).toBe(false);
+    expect(state.questions).toEqual([]);
+  });
+
+  it('should update store for create comment failure', () => {
+    const error = '';
+    const action = createCommentError(error);
     const state = questionReducer(initialState, action);
     expect(state.isLoading).toBe(false);
     expect(state.errors).toBe(error);

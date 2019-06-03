@@ -11,6 +11,7 @@ exports[`Comments renders without errors 1`] = `
       action=""
       className="flex flex-column"
       id="comment-form"
+      onSubmit={[Function]}
     >
       <div
         className="form-group"
@@ -19,7 +20,10 @@ exports[`Comments renders without errors 1`] = `
           className="form-control"
           id="comment"
           name="comment"
+          onChange={[Function]}
           placeholder="Your comment"
+          required={true}
+          value=""
         />
       </div>
       <button
