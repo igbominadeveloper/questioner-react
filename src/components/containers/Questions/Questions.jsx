@@ -9,6 +9,7 @@ import {
   questionVote,
 } from '../../../store/modules/question';
 import { checkAndRedirect } from '../../../store/modules/auth';
+import Loader from '../../presentationals/Loader/Loader';
 
 export class Questions extends Component {
   componentDidMount() {
@@ -47,9 +48,10 @@ export class Questions extends Component {
   };
 
   render() {
-    const { questions } = this.props;
+    const { questions, isLoading } = this.props;
     return (
       <Fragment>
+        {isLoading && <Loader />}
         {questions &&
           questions.length > 0 &&
           questions.map(question => (
@@ -87,7 +89,7 @@ export class Questions extends Component {
 const mapStateToProps = state => ({
   questions: state.question.questions,
   isAuthenticated: state.auth.token !== null,
-  isLoading: state.meetup.isLoading,
+  isLoading: state.question.isLoading,
 });
 
 export default connect(

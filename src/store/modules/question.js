@@ -145,7 +145,6 @@ export const createNewComment = payload => async dispatch => {
     dispatch(createCommentIntialize());
     const { data } = await createCommentRequest(payload);
     dispatch(createCommentSuccess(data.data));
-    debugger;
     swal('Great!!!', 'Your comment has been created', 'success');
   } catch (error) {
     const { data } = error.response;
