@@ -5,6 +5,7 @@ import {
   createQuestionRequest,
   getQuestionsRequest,
   questionVoteRequest,
+  createCommentRequest,
 } from '../../api/question';
 
 //constants
@@ -19,6 +20,10 @@ export const GET_QUESTIONS_ERROR = 'GET_QUESTIONS_ERROR';
 export const QUESTION_VOTE_INITIALIZED = 'QUESTION_VOTE_INITIALIZED';
 export const QUESTION_VOTE_SUCCESS = 'QUESTION_VOTE_SUCCESS';
 export const QUESTION_VOTE_ERROR = 'QUESTION_VOTE_ERROR';
+
+export const CREATE_COMMENT_INITIALIZED = 'CREATE_COMMENT_INITIALIZED';
+export const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS';
+export const CREATE_COMMENT_ERROR = 'CREATE_COMMENT_ERROR';
 
 export const createQuestionIntialize = () => ({
   type: CREATE_QUESTION_INITIALIZED,
@@ -60,6 +65,20 @@ export const questionVoteSuccess = (payload, decision) => ({
 
 export const questionVoteError = error => ({
   type: QUESTION_VOTE_ERROR,
+  error,
+});
+
+export const createCommentIntialize = () => ({
+  type: CREATE_COMMENT_INITIALIZED,
+});
+
+export const createCommentSuccess = payload => ({
+  type: CREATE_COMMENT_SUCCESS,
+  payload,
+});
+
+export const createCommentError = error => ({
+  type: CREATE_COMMENT_ERROR,
   error,
 });
 
@@ -108,12 +127,6 @@ export const questionVote = (decision, questionId) => async dispatch => {
   }
 };
 
-export const initialState = {
-  isLoading: false,
-  errors: [],
-  questions: [],
-};
-
 export const updateVote = (questions, action) => {
   return questions.map(question => {
     if (question.id === action.payload.id) {
@@ -127,11 +140,43 @@ export const updateVote = (questions, action) => {
   });
 };
 
+export const createNewComment = payload => async dispatch => {
+  try {
+    dispatch(createCommentIntialize());
+    const { data } = await createCommentRequest(payload);
+    dispatch(createCommentSuccess(data.data));
+    debugger;
+    swal('Great!!!', 'Your comment has been created', 'success');
+  } catch (error) {
+    const { data } = error.response;
+    swal('error', data.error, 'error');
+    dispatch(createCommentError(data));
+  }
+};
+export const updateComment = (questions, action) => {
+  return questions.map(question => {
+    if (question.id === action.payload.question_id) {
+      return {
+        ...question,
+        comments: question.comments.concat([action.payload]),
+      };
+    }
+    return question;
+  });
+};
+
+export const initialState = {
+  isLoading: false,
+  errors: [],
+  questions: [],
+};
+
 export const questionReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_QUESTION_INITIALIZED:
     case GET_QUESTIONS_INITIALIZED:
     case QUESTION_VOTE_INITIALIZED:
+    case CREATE_COMMENT_INITIALIZED:
       return {
         ...state,
         isLoading: true,
@@ -177,6 +222,21 @@ export const questionReducer = (state = initialState, action) => {
       };
 
     case QUESTION_VOTE_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        errors: action.error,
+      };
+
+    case CREATE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        questions: updateComment(state.questions, action),
+        errors: [],
+      };
+
+    case CREATE_COMMENT_ERROR:
       return {
         ...state,
         isLoading: false,

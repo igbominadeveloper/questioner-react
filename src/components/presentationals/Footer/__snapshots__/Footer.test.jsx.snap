@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Render renders without error 1`] = `
+<footer
+  data-test="footer"
+>
+  <div
+    className="copyright bg-white p-10"
+  >
+    <p
+      className="text-center"
+    >
+      Made with 
+      <i
+        className="fa fa-heart text-danger"
+      />
+      by  
+      <a
+        className="github"
+        href="https://github.com/igbominadeveloper"
+        target="_blank"
+      >
+        igbominadeveloper
+      </a>
+    </p>
+  </div>
+</footer>
+`;

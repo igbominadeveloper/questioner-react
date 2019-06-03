@@ -11,3 +11,6 @@ export const getQuestionsRequest = async meetup_id =>
 
 export const questionVoteRequest = async (questionId, decision) =>
   await http.patch(`/questions/${questionId}/${decision}`);
+
+export const createCommentRequest = async ({ question_id, comment }) =>
+  await http.post('/comments', { question_id, comment });

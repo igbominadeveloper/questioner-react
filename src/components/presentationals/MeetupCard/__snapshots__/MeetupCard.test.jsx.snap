@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MeetupCard Render renders without error 1`] = `
+<div
+  className="meetup shadow pb-2"
+>
+  <div
+    className="meetup-image"
+  >
+    <Image
+      url="http://res.cloudinary.com/igbominadeveloper/image/upload/v1559170146/ian-schneider-66374-unsplash_afbydt.jpg"
+    />
+  </div>
+  <p
+    className="meetup-title"
+  />
+  <p
+    className="meetup-date text-light"
+  >
+    <i
+      className="fa fa-calendar"
+    />
+    June 3, 2019
+  </p>
+  <p
+    className="meetup-date text-light"
+  >
+    <i
+      className="fa fa-clock-o"
+    />
+    12:10 pm
+  </p>
+  <p
+    className="meetup-location text-light"
+  >
+    <i
+      className="fa fa-map-marker"
+    />
+  </p>
+</div>
+`;
